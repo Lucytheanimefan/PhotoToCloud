@@ -366,7 +366,7 @@
 				DEVELOPMENT_TEAM = 65ZN6CM2H7;
 				INFOPLIST_FILE = iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.SamplePhotosApp";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lucy.PhotoToCloud;
 				PRODUCT_NAME = PhotoToCloud;
 				SWIFT_VERSION = 3.0;
 			};
@@ -379,7 +379,7 @@
 				DEVELOPMENT_TEAM = 65ZN6CM2H7;
 				INFOPLIST_FILE = iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.SamplePhotosApp";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lucy.PhotoToCloud;
 				PRODUCT_NAME = PhotoToCloud;
 				SWIFT_VERSION = 3.0;
 			};

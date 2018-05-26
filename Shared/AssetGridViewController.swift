@@ -213,42 +213,35 @@ class AssetGridViewController: UICollectionViewController {
 
 // MARK: PHPhotoLibraryChangeObserver
 extension AssetGridViewController: PHPhotoLibraryChangeObserver {
+    
+    // Change notifications may be made on a background queue.
     func photoLibraryDidChange(_ changeInstance: PHChange) {
 
         guard let changes = changeInstance.changeDetails(for: fetchResult)
             else { return }
-
-        // Change notifications may be made on a background queue. Re-dispatch to the
-        // main queue before acting on the change as we'll be updating the UI.
-        DispatchQueue.main.sync {
-            // Hang on to the new fetch result.
-            fetchResult = changes.fetchResultAfterChanges
-            if changes.hasIncrementalChanges {
-                // If we have incremental diffs, animate them in the collection view.
-                guard let collectionView = self.collectionView else { fatalError() }
-                collectionView.performBatchUpdates({
-                    // For indexes to make sense, updates must be in this order:
-                    // delete, insert, reload, move
-                    if let removed = changes.removedIndexes, removed.count > 0 {
-                        collectionView.deleteItems(at: removed.map({ IndexPath(item: $0, section: 0) }))
-                    }
-                    if let inserted = changes.insertedIndexes, inserted.count > 0 {
-                        collectionView.insertItems(at: inserted.map({ IndexPath(item: $0, section: 0) }))
-                    }
-                    if let changed = changes.changedIndexes, changed.count > 0 {
-                        collectionView.reloadItems(at: changed.map({ IndexPath(item: $0, section: 0) }))
-                    }
-                    changes.enumerateMoves { fromIndex, toIndex in
-                        collectionView.moveItem(at: IndexPath(item: fromIndex, section: 0),
-                                                to: IndexPath(item: toIndex, section: 0))
-                    }
-                })
-            } else {
-                // Reload the collection view if incremental diffs are not available.
-                collectionView!.reloadData()
+        
+        fetchResult = changes.fetchResultAfterChanges
+        if changes.hasIncrementalChanges {
+            // If we have incremental diffs
+            if let removed = changes.removedIndexes, removed.count > 0 {
+                
             }
-            resetCachedAssets()
+            if let inserted = changes.insertedIndexes, inserted.count > 0 {
+
+                print("Added photos: \(inserted.count)")
+                
+                // New photos are added, upload to cloud
+            }
+            if let changed = changes.changedIndexes, changed.count > 0 {
+                
+            }
+            changes.enumerateMoves { fromIndex, toIndex in
+               
+            }
+        } else {
+            // incremental diffs are not available, do nothing
         }
+        // resetCachedAssets()
     }
 }
 

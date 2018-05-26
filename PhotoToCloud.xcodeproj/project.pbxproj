@@ -8,13 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		118FE1161CEF0525004F2F51 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FE1151CEF0525004F2F51 /* AppDelegate.swift */; };
-		118FE1181CEF0525004F2F51 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FE1171CEF0525004F2F51 /* MasterViewController.swift */; };
-		118FE11A1CEF0525004F2F51 /* AssetGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FE1191CEF0525004F2F51 /* AssetGridViewController.swift */; };
 		118FE11D1CEF0525004F2F51 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 118FE11B1CEF0525004F2F51 /* Main.storyboard */; };
 		118FE11F1CEF0525004F2F51 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 118FE11E1CEF0525004F2F51 /* Assets.xcassets */; };
 		118FE1221CEF0525004F2F51 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 118FE1201CEF0525004F2F51 /* LaunchScreen.storyboard */; };
-		11E1BB9B1CF1371A0057E18F /* GridViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E1BB9A1CF1371A0057E18F /* GridViewCell.swift */; };
-		11E1BB9E1CF137450057E18F /* AssetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E1BB9D1CF137450057E18F /* AssetViewController.swift */; };
 		7CD6676620B9E2DE00C5AC1D /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD6676520B9E2DE00C5AC1D /* WebViewController.swift */; };
 		7CD6676820B9EC0E00C5AC1D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD6676720B9EC0E00C5AC1D /* Constants.swift */; };
 		7CD6676A20B9EC8C00C5AC1D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD6676920B9EC8C00C5AC1D /* MainViewController.swift */; };
@@ -102,15 +98,11 @@
 /* Begin PBXFileReference section */
 		118FE1121CEF0525004F2F51 /* PhotoToCloud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoToCloud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		118FE1151CEF0525004F2F51 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		118FE1171CEF0525004F2F51 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MasterViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		118FE1191CEF0525004F2F51 /* AssetGridViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetGridViewController.swift; sourceTree = "<group>"; };
 		118FE11C1CEF0525004F2F51 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		118FE11E1CEF0525004F2F51 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		118FE1211CEF0525004F2F51 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		118FE1231CEF0525004F2F51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		119E70161CF3CC1700F01BF5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		11E1BB9A1CF1371A0057E18F /* GridViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridViewCell.swift; sourceTree = "<group>"; };
-		11E1BB9D1CF137450057E18F /* AssetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AssetViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		7C6D8BF020B9D33A0024DA05 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		7C6D8BF220B9D4D00024DA05 /* PhotoToCloud-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PhotoToCloud-Bridging-Header.h"; sourceTree = "<group>"; };
 		7CD6676520B9E2DE00C5AC1D /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
@@ -169,10 +161,6 @@
 			isa = PBXGroup;
 			children = (
 				118FE1151CEF0525004F2F51 /* AppDelegate.swift */,
-				118FE1171CEF0525004F2F51 /* MasterViewController.swift */,
-				118FE1191CEF0525004F2F51 /* AssetGridViewController.swift */,
-				11E1BB9A1CF1371A0057E18F /* GridViewCell.swift */,
-				11E1BB9D1CF137450057E18F /* AssetViewController.swift */,
 				7C6D8BF220B9D4D00024DA05 /* PhotoToCloud-Bridging-Header.h */,
 				7CD6676520B9E2DE00C5AC1D /* WebViewController.swift */,
 				7CD6676720B9EC0E00C5AC1D /* Constants.swift */,
@@ -336,12 +324,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11E1BB9E1CF137450057E18F /* AssetViewController.swift in Sources */,
 				7CD6676620B9E2DE00C5AC1D /* WebViewController.swift in Sources */,
-				11E1BB9B1CF1371A0057E18F /* GridViewCell.swift in Sources */,
-				118FE11A1CEF0525004F2F51 /* AssetGridViewController.swift in Sources */,
 				7CD6676820B9EC0E00C5AC1D /* Constants.swift in Sources */,
-				118FE1181CEF0525004F2F51 /* MasterViewController.swift in Sources */,
 				118FE1161CEF0525004F2F51 /* AppDelegate.swift in Sources */,
 				7CD6676A20B9EC8C00C5AC1D /* MainViewController.swift in Sources */,
 			);

@@ -49,16 +49,6 @@
             </objects>
             <point key="canvasLocation" x="-887.20000000000005" y="-1039.4302848575712"/>
         </scene>
-        <!--Split View Controller-->
-        <scene sceneID="Nki-YV-4Qg">
-            <objects>
-                <splitViewController id="H1p-Uh-vWS" sceneMemberID="viewController">
-                    <toolbarItems/>
-                </splitViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cZU-Oi-B1e" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="945" y="-225"/>
-        </scene>
         <!--Main View Controller-->
         <scene sceneID="TuO-kg-RSh">
             <objects>

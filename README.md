@@ -10,3 +10,4 @@ An iOS app that automatically uploads your photos to the cloud. Made for people 
 ## Future Features
 * Uploading pictures automatically to: Google Drive, One Drive, Dropbox, etc. (And a settings view to configure all of this)
 * Smarter detection of new photos vs. modified photos.
+* It's pretty ugly right now.

@@ -11,27 +11,45 @@ import UIKit
 import Photos
 import UserNotifications
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
 
     var window: UIWindow?
     var fetchResult: PHFetchResult<PHAsset>!
     
-  
+    func uploadImageToFlickr(image:UIImage){
+        FlickrKit.shared().uploadImage(image, args: nil) { (result, error) in
+            if (error != nil){
+                print("Error uploading image!")
+            }
+            else
+            {
+                print(result)
+            }
+        }
+    }
+    
+    func setUpFlickr(){
+        FlickrKit.shared().initialize(withAPIKey: Flickr.APIKEY, sharedSecret: Flickr.APISECRET)
+        FlickrKit.shared().checkAuthorization { (a, b, c, error) in
+            if (error != nil){
+                self.window?.rootViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "webView")
+            }
+            else{
+                print("Already authed")
+            }
+        }
+    }
  
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        setUpFlickr()
         registerForPushNotifications()
         updateFetchResult()
         PHPhotoLibrary.shared().register(self)
         
-        let splitViewController = self.window!.rootViewController as! UISplitViewController
-        #if os(iOS)
-            let navigationController = splitViewController.viewControllers.last! as! UINavigationController
-            navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
-        #endif
-        splitViewController.delegate = self
         return true
     }
     
@@ -182,6 +200,13 @@ extension AppDelegate: PHPhotoLibraryChangeObserver {
                 // New photos are added, upload to cloud
                 print("\(self.description): Added photos: \(inserted.count)")
                 
+                changes.insertedObjects.forEach { (asset) in
+                    if let image = getUIImage(asset: asset){
+                        uploadImageToFlickr(image: image)
+                    }
+                }
+                
+                
                 #if DEBUG
                 doNotifications(numPhotos: inserted.count)
                 #endif
@@ -197,6 +222,22 @@ extension AppDelegate: PHPhotoLibraryChangeObserver {
             // incremental diffs are not available, do nothing
         }
         // resetCachedAssets()
+    }
+    
+    func getUIImage(asset: PHAsset) -> UIImage? {
+        
+        var img: UIImage?
+        let manager = PHImageManager.default()
+        let options = PHImageRequestOptions()
+        options.version = .original
+        options.isSynchronous = true
+        manager.requestImageData(for: asset, options: options) { data, _, _, _ in
+            
+            if let data = data {
+                img = UIImage(data: data)
+            }
+        }
+        return img
     }
 }
 

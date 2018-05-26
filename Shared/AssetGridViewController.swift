@@ -213,35 +213,9 @@ class AssetGridViewController: UICollectionViewController {
 
 // MARK: PHPhotoLibraryChangeObserver
 extension AssetGridViewController: PHPhotoLibraryChangeObserver {
-    
-    // Change notifications may be made on a background queue.
     func photoLibraryDidChange(_ changeInstance: PHChange) {
 
-        guard let changes = changeInstance.changeDetails(for: fetchResult)
-            else { return }
         
-        fetchResult = changes.fetchResultAfterChanges
-        if changes.hasIncrementalChanges {
-            // If we have incremental diffs
-            if let removed = changes.removedIndexes, removed.count > 0 {
-                
-            }
-            if let inserted = changes.insertedIndexes, inserted.count > 0 {
-
-                print("Added photos: \(inserted.count)")
-                
-                // New photos are added, upload to cloud
-            }
-            if let changed = changes.changedIndexes, changed.count > 0 {
-                
-            }
-            changes.enumerateMoves { fromIndex, toIndex in
-               
-            }
-        } else {
-            // incremental diffs are not available, do nothing
-        }
-        // resetCachedAssets()
     }
 }
 

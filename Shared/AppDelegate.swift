@@ -35,6 +35,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         return true
     }
     
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        let bgTask = UIApplication.shared.beginBackgroundTask(expirationHandler: {
+            
+        })
+
+        if (bgTask == UIBackgroundTaskInvalid) {
+            print("This application does not support background mode");
+        } else {
+            //if application supports background mode, we'll see this log.
+            print("Application will continue to run in background");
+            PHPhotoLibrary.requestAuthorization { (status) in
+                if (status == .authorized) {
+                    PHPhotoLibrary.shared().register(self)
+                }
+            }
+            
+            PHPhotoLibrary.shared().register(self)
+        }
+    }
+    
     func applicationSignificantTimeChange(_ application: UIApplication) {
         updateFetchResult()
     }

@@ -179,10 +179,13 @@ extension AppDelegate: PHPhotoLibraryChangeObserver {
                 
             }
             if let inserted = changes.insertedIndexes, inserted.count > 0 {
-                
-                print("\(self.description): Added photos: \(inserted.count)")
-                doNotifications(numPhotos: inserted.count)
                 // New photos are added, upload to cloud
+                print("\(self.description): Added photos: \(inserted.count)")
+                
+                #if DEBUG
+                doNotifications(numPhotos: inserted.count)
+                #endif
+                
             }
             if let changed = changes.changedIndexes, changed.count > 0 {
                 

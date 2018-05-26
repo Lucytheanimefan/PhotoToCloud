@@ -9,6 +9,7 @@
 
 import UIKit
 import Photos
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
@@ -20,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
  
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        registerForPushNotifications()
         updateFetchResult()
         PHPhotoLibrary.shared().register(self)
         
@@ -44,6 +47,75 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         fetchResult = PHAsset.fetchAssets(with: allPhotosOptions)
         
     }
+    
+    func registerForPushNotifications() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
+            (granted, error) in
+            print("Permission granted: \(granted)")
+            
+            guard granted else { return }
+            self.getNotificationSettings()
+        }
+    }
+    
+    func getNotificationSettings() {
+        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+            print("Notification settings: \(settings)")
+            guard settings.authorizationStatus == .authorized else { return }
+            DispatchQueue.main.async {
+                UIApplication.shared.registerForRemoteNotifications()
+            }
+        }
+    }
+    
+    func doNotifications(numPhotos:Int) {
+        
+        // START NOTIFICATION
+        
+        let center = UNUserNotificationCenter.current()
+        center.delegate = self
+        //let options: UNAuthorizationOptions = [.alert, .sound]
+        
+        // content 1
+        let content = UNMutableNotificationContent()
+        content.title = "Photo added"
+        content.body = "Added \(numPhotos) photos"
+        content.sound = UNNotificationSound.default()
+        
+        
+        // content one actions
+        let snoozeAction = UNNotificationAction(identifier: "Yes",
+                                                title: "Yes", options: [])
+        let deleteAction = UNNotificationAction(identifier: "No",
+                                                title: "No", options: [.destructive])
+        
+        // content2 actions
+        let emailAction = UNNotificationAction(identifier: "emailAction", title: "Email Provider", options: [.foreground])
+        let textAction = UNNotificationAction(identifier: "textAction", title: "Text Provider", options: [.foreground])
+        let callAction = UNNotificationAction(identifier: "callAction", title: "Call Provider", options: [.foreground])
+        
+        content.categoryIdentifier = "UYLReminderCategory"
+        
+        // content one category
+        let category = UNNotificationCategory(identifier: "UYLReminderCategory",
+                                              actions: [snoozeAction,deleteAction],
+                                              intentIdentifiers: [], options: [])
+        
+        center.setNotificationCategories([category])
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1,
+                                                        repeats: false)
+        let identifier = "UYLLocalNotification"
+        let request = UNNotificationRequest(identifier: identifier,
+                                            content: content, trigger: trigger)
+        center.add(request, withCompletionHandler: { (error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        })
+        
+    }
+
 
     // MARK: Split view
 
@@ -89,7 +161,7 @@ extension AppDelegate: PHPhotoLibraryChangeObserver {
             if let inserted = changes.insertedIndexes, inserted.count > 0 {
                 
                 print("\(self.description): Added photos: \(inserted.count)")
-                
+                doNotifications(numPhotos: inserted.count)
                 // New photos are added, upload to cloud
             }
             if let changed = changes.changedIndexes, changed.count > 0 {
@@ -103,5 +175,15 @@ extension AppDelegate: PHPhotoLibraryChangeObserver {
         }
         // resetCachedAssets()
     }
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate{
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        // Play sound and show alert to the user
+        completionHandler([.alert,.sound])
+    }
+
 }
 

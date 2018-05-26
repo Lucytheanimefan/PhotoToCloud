@@ -25,7 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             }
             else
             {
+                #if DEBUG
                 print(result)
+                self.doNotifications()
+                #endif
             }
         }
     }
@@ -106,7 +109,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         }
     }
     
-    func doNotifications(numPhotos:Int) {
+    func doNotifications(numPhotos:Int = 1) {
         
         // START NOTIFICATION
         
@@ -116,7 +119,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         
         // content 1
         let content = UNMutableNotificationContent()
-        content.title = "Photo added"
+        content.title = "Photo uploaded"
         content.body = "Added \(numPhotos) photos"
         content.sound = UNNotificationSound.default()
         
@@ -205,11 +208,6 @@ extension AppDelegate: PHPhotoLibraryChangeObserver {
                         uploadImageToFlickr(image: image)
                     }
                 }
-                
-                
-                #if DEBUG
-                doNotifications(numPhotos: inserted.count)
-                #endif
                 
             }
             if let changed = changes.changedIndexes, changed.count > 0 {

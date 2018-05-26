@@ -108,9 +108,6 @@
 		118FE11E1CEF0525004F2F51 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		118FE1211CEF0525004F2F51 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		118FE1231CEF0525004F2F51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		118FE1341CEF07DE004F2F51 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		118FE1361CEF07DE004F2F51 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		118FE1381CEF07DE004F2F51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		119E70161CF3CC1700F01BF5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		11E1BB9A1CF1371A0057E18F /* GridViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridViewCell.swift; sourceTree = "<group>"; };
 		11E1BB9D1CF137450057E18F /* AssetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AssetViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -144,7 +141,6 @@
 				119E70161CF3CC1700F01BF5 /* README.md */,
 				118FE13C1CEF07EB004F2F51 /* Shared */,
 				118FE1141CEF0525004F2F51 /* iOS */,
-				118FE12E1CEF07DE004F2F51 /* tvOS */,
 				118FE1131CEF0525004F2F51 /* Products */,
 				7C6D8BEA20B9D2F00024DA05 /* Frameworks */,
 			);
@@ -167,16 +163,6 @@
 				118FE1231CEF0525004F2F51 /* Info.plist */,
 			);
 			path = iOS;
-			sourceTree = "<group>";
-		};
-		118FE12E1CEF07DE004F2F51 /* tvOS */ = {
-			isa = PBXGroup;
-			children = (
-				118FE1331CEF07DE004F2F51 /* Main.storyboard */,
-				118FE1361CEF07DE004F2F51 /* Assets.xcassets */,
-				118FE1381CEF07DE004F2F51 /* Info.plist */,
-			);
-			path = tvOS;
 			sourceTree = "<group>";
 		};
 		118FE13C1CEF07EB004F2F51 /* Shared */ = {
@@ -391,14 +377,6 @@
 				118FE1211CEF0525004F2F51 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		118FE1331CEF07DE004F2F51 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				118FE1341CEF07DE004F2F51 /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

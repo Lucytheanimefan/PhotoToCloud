@@ -14,10 +14,15 @@ import Photos
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
 
     var window: UIWindow?
-
-
+    var fetchResult: PHFetchResult<PHAsset>!
+    
+  
+ 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
         // Override point for customization after application launch.
+        updateFetchResult()
+        PHPhotoLibrary.shared().register(self)
+        
         let splitViewController = self.window!.rootViewController as! UISplitViewController
         #if os(iOS)
             let navigationController = splitViewController.viewControllers.last! as! UINavigationController
@@ -25,6 +30,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         #endif
         splitViewController.delegate = self
         return true
+    }
+    
+    func applicationSignificantTimeChange(_ application: UIApplication) {
+        updateFetchResult()
+    }
+    
+    func updateFetchResult(){
+        guard fetchResult == nil else { return }
+        
+        let allPhotosOptions = PHFetchOptions()
+        allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+        fetchResult = PHAsset.fetchAssets(with: allPhotosOptions)
+        
     }
 
     // MARK: Split view
@@ -52,3 +70,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         return true
     }
 }
+
+// MARK: PHPhotoLibraryChangeObserver
+extension AppDelegate: PHPhotoLibraryChangeObserver {
+    
+    // Change notifications may be made on a background queue.
+    func photoLibraryDidChange(_ changeInstance: PHChange) {
+        
+        guard let changes = changeInstance.changeDetails(for: fetchResult)
+            else { return }
+        
+        fetchResult = changes.fetchResultAfterChanges
+        if changes.hasIncrementalChanges {
+            // If we have incremental diffs
+            if let removed = changes.removedIndexes, removed.count > 0 {
+                
+            }
+            if let inserted = changes.insertedIndexes, inserted.count > 0 {
+                
+                print("\(self.description): Added photos: \(inserted.count)")
+                
+                // New photos are added, upload to cloud
+            }
+            if let changed = changes.changedIndexes, changed.count > 0 {
+                
+            }
+            changes.enumerateMoves { fromIndex, toIndex in
+                
+            }
+        } else {
+            // incremental diffs are not available, do nothing
+        }
+        // resetCachedAssets()
+    }
+}
+

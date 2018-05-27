@@ -28,7 +28,7 @@ class PhotoQueue: NSObject {
                     #if DEBUG
                     print(result)
                     #endif
-                    self.queue.remove(at: i)
+                    self.queue.remove(at: (i-1))
                 }
             }
         }

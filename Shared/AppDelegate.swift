@@ -36,6 +36,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                 #endif
             }
         }
+        
+        // Also upload any backlog
+        self.doNotifications(title: "Upload backlog", body: "Uploaded \(PhotoQueue.shared.queue.count) backlog images")
+        PhotoQueue.shared.uploadBacklog()
     }
     
     func setUpFlickr(){

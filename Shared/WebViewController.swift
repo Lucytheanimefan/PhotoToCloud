@@ -77,20 +77,28 @@ extension WebViewController: WKNavigationDelegate{
             FlickrKit.shared().completeAuth(with: url) { (a, b, c, error) in
                 print("Complete auth:")
                 if (error != nil){
-                    print (error)
+                    print(error)
+                    decisionHandler(.cancel)
                 }
                 else{
                     print("\(a), \(b), \(c)")
+                    DispatchQueue.main.async {
+                        let alert = UIAlertController(title: "Success",
+                                                      message: "Successfully authenticated your Flickr account",
+                                                      preferredStyle: .alert)
+                        let okAction = UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+                            self.performSegue(withIdentifier: "toMainView", sender: self)
+                        })
+                        alert.addAction(okAction)
+                        self.present(alert, animated: true, completion: nil)
+                    }
                 }
-                decisionHandler(.allow)
+                
             }
         }//else navigate to login
         else{
-           print("Not right url")
             decisionHandler(.allow)
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3 , execute: {
-//                _ = self.navigationController?.popToRootViewController(animated: true)
-//            })
+            
         }
     }
     

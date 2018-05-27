@@ -13,7 +13,7 @@ class Settings: NSObject {
     static let shared = Settings()
     
     lazy var flickrArgs = {
-        return ["is_public":self.is_public, "is_friend":self.is_friend, "is_family":self.is_family, "safety_level":self.safety_level]
+        return ["is_public":self.is_public.description, "is_friend":self.is_friend.description, "is_family":self.is_family.description, "safety_level":self.safety_level.description]
     }()
     
     private var is_public_val = 0

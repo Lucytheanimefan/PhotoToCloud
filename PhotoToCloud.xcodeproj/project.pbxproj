@@ -16,9 +16,10 @@
 		7CD6676A20B9EC8C00C5AC1D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD6676920B9EC8C00C5AC1D /* MainViewController.swift */; };
 		7CD6678420B9EE1100C5AC1D /* libFlickrKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CD6677520B9EDBF00C5AC1D /* libFlickrKit.a */; };
 		7CD6678720B9EEA000C5AC1D /* libFlickrKit.a in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7CD6677520B9EDBF00C5AC1D /* libFlickrKit.a */; };
-		7CD6678A20B9F07500C5AC1D /* FlickrKitFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CD6678920B9F07400C5AC1D /* FlickrKitFramework.framework */; };
 		7CD6678B20B9F1D500C5AC1D /* FlickrKitFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CD6677B20B9EDBF00C5AC1D /* FlickrKitFramework.framework */; };
 		7CD6678C20B9F1D500C5AC1D /* FlickrKitFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7CD6677B20B9EDBF00C5AC1D /* FlickrKitFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7CD6679D20BA2EC000C5AC1D /* PhotoQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD6679C20BA2EC000C5AC1D /* PhotoQueue.swift */; };
+		7CD6679F20BA2F0500C5AC1D /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD6679E20BA2F0500C5AC1D /* Reachability.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +111,8 @@
 		7CD6676920B9EC8C00C5AC1D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7CD6676B20B9EDBF00C5AC1D /* FlickrKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FlickrKit.xcodeproj; path = "FlickrKit-master/FlickrKit.xcodeproj"; sourceTree = "<group>"; };
 		7CD6678920B9F07400C5AC1D /* FlickrKitFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FlickrKitFramework.framework; path = "../../Library/Developer/Xcode/DerivedData/PhotoToCloud-alfghramtpxolefhksxbnorhljpl/Build/Products/Debug-iphoneos/FlickrKitFramework.framework"; sourceTree = "<group>"; };
+		7CD6679C20BA2EC000C5AC1D /* PhotoQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoQueue.swift; sourceTree = "<group>"; };
+		7CD6679E20BA2F0500C5AC1D /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,7 +120,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7CD6678A20B9F07500C5AC1D /* FlickrKitFramework.framework in Frameworks */,
 				7CD6678B20B9F1D500C5AC1D /* FlickrKitFramework.framework in Frameworks */,
 				7CD6678420B9EE1100C5AC1D /* libFlickrKit.a in Frameworks */,
 			);
@@ -165,6 +167,8 @@
 				7CD6676520B9E2DE00C5AC1D /* WebViewController.swift */,
 				7CD6676720B9EC0E00C5AC1D /* Constants.swift */,
 				7CD6676920B9EC8C00C5AC1D /* MainViewController.swift */,
+				7CD6679C20BA2EC000C5AC1D /* PhotoQueue.swift */,
+				7CD6679E20BA2F0500C5AC1D /* Reachability.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -325,6 +329,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CD6676620B9E2DE00C5AC1D /* WebViewController.swift in Sources */,
+				7CD6679D20BA2EC000C5AC1D /* PhotoQueue.swift in Sources */,
+				7CD6679F20BA2F0500C5AC1D /* Reachability.swift in Sources */,
 				7CD6676820B9EC0E00C5AC1D /* Constants.swift in Sources */,
 				118FE1161CEF0525004F2F51 /* AppDelegate.swift in Sources */,
 				7CD6676A20B9EC8C00C5AC1D /* MainViewController.swift in Sources */,

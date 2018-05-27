@@ -10,7 +10,7 @@
 import UIKit
 import Photos
 import UserNotifications
-
+// import SwiftyDropbox
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
@@ -19,6 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     var fetchResult: PHFetchResult<PHAsset>!
     
     func uploadImageToFlickr(image:UIImage){
+        guard Reachability.isConnectedToNetwork() else {
+            PhotoQueue.shared.queue.append(image)
+            return
+        }
+        
         FlickrKit.shared().uploadImage(image, args: nil) { (result, error) in
             if (error != nil){
                 print("Error uploading image!")
@@ -27,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             {
                 #if DEBUG
                 print(result)
-                self.doNotifications()
+                self.doNotifications(title: "Successful upload", body: "Uploaded image to Flickr")
                 #endif
             }
         }
@@ -43,6 +48,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                 print("Already authed")
             }
         }
+    }
+    
+    func setupDropbox(){
+        // DropboxClientsManager.setupWithAppKey("<APP_KEY>")
     }
  
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
@@ -78,6 +87,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     
     func applicationSignificantTimeChange(_ application: UIApplication) {
         updateFetchResult()
+        self.doNotifications(title: "Upload backlog", body: "Uploaded \(PhotoQueue.shared.queue.count) backlog images")
+        PhotoQueue.shared.uploadBacklog()
     }
     
     func updateFetchResult(){
@@ -109,7 +120,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         }
     }
     
-    func doNotifications(numPhotos:Int = 1) {
+    func doNotifications(title:String, body:String) {
         
         // START NOTIFICATION
         
@@ -119,8 +130,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         
         // content 1
         let content = UNMutableNotificationContent()
-        content.title = "Photo uploaded"
-        content.body = "Added \(numPhotos) photos"
+        content.title = title
+        content.body = body
         content.sound = UNNotificationSound.default()
         
         
@@ -130,11 +141,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let deleteAction = UNNotificationAction(identifier: "No",
                                                 title: "No", options: [.destructive])
         
-        // content2 actions
-        let emailAction = UNNotificationAction(identifier: "emailAction", title: "Email Provider", options: [.foreground])
-        let textAction = UNNotificationAction(identifier: "textAction", title: "Text Provider", options: [.foreground])
-        let callAction = UNNotificationAction(identifier: "callAction", title: "Call Provider", options: [.foreground])
-        
+
         content.categoryIdentifier = "UYLReminderCategory"
         
         // content one category

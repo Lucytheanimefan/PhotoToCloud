@@ -28,7 +28,7 @@ class WebViewController: UIViewController {
     }
     
     func setUpFlickr(){
-        FlickrKit.shared().initialize(withAPIKey: Flickr.APIKEY, sharedSecret: Flickr.APISECRET)
+        FlickrKit.shared().initialize(withAPIKey: Constants.Flickr.APIKEY, sharedSecret: Constants.Flickr.APISECRET)
         
         FlickrKit.shared().checkAuthorization(onCompletion: { (a, b, c, error) in
             print("Check auth:")

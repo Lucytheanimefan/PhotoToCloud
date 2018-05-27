@@ -19,7 +19,7 @@ class PhotoQueue: NSObject {
             guard Reachability.isConnectedToNetwork() else {
                 continue
             }
-            FlickrKit.shared().uploadImage(image, args: nil) { (result, error) in
+            FlickrKit.shared().uploadImage(image, args: Settings.shared.flickrArgs) { (result, error) in
                 if (error != nil){
                     print("Error uploading image! \(error)")
                 }

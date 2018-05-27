@@ -24,9 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             return
         }
         
+        print("Upload Flickr image with settings: \(Settings.shared.flickrArgs)")
         FlickrKit.shared().uploadImage(image, args: nil) { (result, error) in
             if (error != nil){
-                print("Error uploading image!")
+                print("Error uploading image: \(error!.localizedDescription)")
             }
             else
             {
@@ -43,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     }
     
     func setUpFlickr(){
-        FlickrKit.shared().initialize(withAPIKey: Flickr.APIKEY, sharedSecret: Flickr.APISECRET)
+        FlickrKit.shared().initialize(withAPIKey: Constants.Flickr.APIKEY, sharedSecret: Constants.Flickr.APISECRET)
         FlickrKit.shared().checkAuthorization { (a, b, c, error) in
             if (error != nil){
                 self.window?.rootViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "webView")

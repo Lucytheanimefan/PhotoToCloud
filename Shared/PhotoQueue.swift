@@ -12,11 +12,11 @@ class PhotoQueue: NSObject {
     
     static let shared = PhotoQueue()
     
-    lazy var isBacklog:Bool{
-        return queue.count > 0
-    }()
-    
     var queue:[UIImage] = [UIImage]()
+    
+    func isBacklog()->Bool{
+        return self.queue.count > 0
+    }
     
     func uploadBacklog(){
         for (i, image) in queue.enumerated(){

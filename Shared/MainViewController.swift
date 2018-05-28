@@ -23,6 +23,13 @@ class MainViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        #if DEBUG
+        Settings.shared.logs.append("\(Date()): Accessed main view")
+        #endif
+    }
+    
     func updateLoginStatus(){
         FlickrKit.shared().checkAuthorization { (username, auth, name, error) in
             DispatchQueue.main.async {

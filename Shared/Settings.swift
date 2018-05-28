@@ -8,9 +8,15 @@
 
 import UIKit
 
+protocol LogDelegate{
+    func onAddLog()
+}
+
 class Settings: NSObject {
     
     static let shared = Settings()
+    
+    var logDelegate:LogDelegate?
     
     lazy var flickrArgs = {
         return ["is_public":self.is_public.description, "is_friend":self.is_friend.description, "is_family":self.is_family.description, "safety_level":self.safety_level.description]
@@ -80,12 +86,17 @@ class Settings: NSObject {
     
     var logs:[String] {
         get {
-            let value = UserDefaults.standard.stringArray(forKey: "logs") ?? logs_val
-            return value
+            if let value = UserDefaults.standard.stringArray(forKey: "logs") {
+                print(value)
+                return value
+            }
+            print("logs_val: \(logs_val)")
+            return logs_val
         }
         set {
             UserDefaults.standard.set(newValue, forKey: "logs")
             logs_val = newValue
+            logDelegate?.onAddLog()
         }
     }
     

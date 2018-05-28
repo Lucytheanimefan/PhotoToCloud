@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             }
         }
         
-        if (PhotoQueue.shared.isBacklog){
+        if (PhotoQueue.shared.isBacklog()){
             // Also upload any backlog
             #if DEBUG
             self.doNotifications(title: "Upload backlog", body: "Uploaded \(PhotoQueue.shared.queue.count) backlog images")

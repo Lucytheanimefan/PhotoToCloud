@@ -76,5 +76,18 @@ class Settings: NSObject {
         }
     }
     
+    private var logs_val = [String]()
+    
+    var logs:[String] {
+        get {
+            let value = UserDefaults.standard.stringArray(forKey: "logs") ?? logs_val
+            return value
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "logs")
+            logs_val = newValue
+        }
+    }
+    
     
 }

@@ -12,6 +12,10 @@ class PhotoQueue: NSObject {
     
     static let shared = PhotoQueue()
     
+    lazy var isBacklog:Bool{
+        return queue.count > 0
+    }()
+    
     var queue:[UIImage] = [UIImage]()
     
     func uploadBacklog(){

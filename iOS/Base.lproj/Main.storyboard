@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Pv9-b9-vCH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sW9-ri-1oI">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -58,7 +58,25 @@
             </objects>
             <point key="canvasLocation" x="-935.20000000000005" y="-1039.4302848575712"/>
         </scene>
-        <!--Main View Controller-->
+        <!--Tab Bar Controller-->
+        <scene sceneID="CLV-EX-bUB">
+            <objects>
+                <tabBarController id="sW9-ri-1oI" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="L9O-8X-TK8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Pv9-b9-vCH" kind="relationship" relationship="viewControllers" id="qZJ-mp-cQI"/>
+                        <segue destination="jaj-zo-MKm" kind="relationship" relationship="viewControllers" id="dJk-Vj-fH1"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LGz-qh-1Fd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2119" y="-313"/>
+        </scene>
+        <!--Item-->
         <scene sceneID="TuO-kg-RSh">
             <objects>
                 <viewController id="Pv9-b9-vCH" customClass="MainViewController" customModule="PhotoToCloud" customModuleProvider="target" sceneMemberID="viewController">
@@ -80,6 +98,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="dz2-eq-Pck"/>
                     <connections>
                         <outlet property="loginStatusTextView" destination="eId-ch-a8b" id="CdQ-2t-DZ3"/>
                     </connections>
@@ -88,5 +107,37 @@
             </objects>
             <point key="canvasLocation" x="-935.20000000000005" y="-312.59370314842579"/>
         </scene>
+        <!--Logs-->
+        <scene sceneID="Xxa-go-0xz">
+            <objects>
+                <tableViewController id="jaj-zo-MKm" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="bap-dd-Bin">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="x4n-yG-RpB">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="x4n-yG-RpB" id="ESO-T6-Jqp">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="jaj-zo-MKm" id="Gso-P8-zW5"/>
+                            <outlet property="delegate" destination="jaj-zo-MKm" id="rYA-oW-mJs"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Logs" id="nBF-g1-zFo"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S1f-SJ-64x" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-934" y="438"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="qZJ-mp-cQI"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         print("Upload Flickr image with settings: \(Settings.shared.flickrArgs)")
         FlickrKit.shared().uploadImage(image, args: Settings.shared.flickrArgs) { (result, error) in
             if (error != nil){
+                Settings.shared.logs.append("\(Date()): Error uploading image: \(error!.localizedDescription)")
                 print("Error uploading image: \(error!.localizedDescription)")
             }
             else
@@ -35,12 +36,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                 print(result)
                 self.doNotifications(title: "Successful upload", body: "Uploaded image to Flickr")
                 #endif
+                Settings.shared.logs.append("\(Date()): Uploaded image to Flickr")
             }
         }
         
-        // Also upload any backlog
-        self.doNotifications(title: "Upload backlog", body: "Uploaded \(PhotoQueue.shared.queue.count) backlog images")
-        PhotoQueue.shared.uploadBacklog()
+        if (PhotoQueue.shared.isBacklog){
+            // Also upload any backlog
+            #if DEBUG
+            self.doNotifications(title: "Upload backlog", body: "Uploaded \(PhotoQueue.shared.queue.count) backlog images")
+            #endif
+            PhotoQueue.shared.uploadBacklog()
+            Settings.shared.logs.append("\(Date()): Uploaded backlog of \(PhotoQueue.shared.queue.count) images")
+        }
     }
     
     func setUpFlickr(){
@@ -190,6 +197,7 @@ extension AppDelegate: PHPhotoLibraryChangeObserver {
             if let inserted = changes.insertedIndexes, inserted.count > 0 {
                 // New photos are added, upload to cloud
                 print("\(self.description): Added photos: \(inserted.count)")
+                Settings.shared.logs.append("\(Date()): New photo detected")
                 
                 changes.insertedObjects.forEach { (asset) in
                     if let image = getUIImage(asset: asset){

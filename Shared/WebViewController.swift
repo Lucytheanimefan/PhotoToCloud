@@ -33,7 +33,6 @@ class WebViewController: UIViewController {
         FlickrKit.shared().checkAuthorization(onCompletion: { (a, b, c, error) in
             print("Check auth:")
             if (error != nil){
-                print (error)
                 self.auth()
             }
             else{
@@ -50,6 +49,7 @@ class WebViewController: UIViewController {
             DispatchQueue.main.async(execute: { () -> Void in
                 if let error = error?.localizedDescription{
                     print(error)
+                    Settings.shared.logs.append("\(Date()): Error authenticating: \(error)")
                 }else{
                     let urlRequest = NSMutableURLRequest(url: url!, cachePolicy: NSURLRequest.CachePolicy.useProtocolCachePolicy, timeoutInterval: 30)
                     self.webView.load(urlRequest as URLRequest)
@@ -78,10 +78,12 @@ extension WebViewController: WKNavigationDelegate{
                 print("Complete auth:")
                 if (error != nil){
                     print(error)
+                    Settings.shared.logs.append("\(Date()): Error completing auth: \(error!.localizedDescription)")
                     decisionHandler(.cancel)
                 }
                 else{
                     print("\(a), \(b), \(c)")
+                    Settings.shared.logs.append("\(Date()): Successfully authenticated \(a)'s Flickr account")
                     DispatchQueue.main.async {
                         let alert = UIAlertController(title: "Success",
                                                       message: "Successfully authenticated your Flickr account",

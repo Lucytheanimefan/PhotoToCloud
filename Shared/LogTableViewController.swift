@@ -9,6 +9,8 @@
 import UIKit
 
 class LogTableViewController: UITableViewController {
+    
+    var selectedLog:String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +50,17 @@ class LogTableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "toSingleLogView", sender: self)
+    }
+    
 
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+         self.selectedLog = Settings.shared.logs[indexPath.row]
+        
+        print(selectedLog)
+        return indexPath
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -84,15 +96,19 @@ class LogTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if let vc = segue.destination as? LogViewController{
+            vc.log = selectedLog
+            print(vc.log)
+        }
     }
-    */
+    
 
 }
 

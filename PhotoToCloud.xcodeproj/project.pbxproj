@@ -22,6 +22,7 @@
 		7CD6679F20BA2F0500C5AC1D /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD6679E20BA2F0500C5AC1D /* Reachability.swift */; };
 		7CD667A120BB648C00C5AC1D /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD667A020BB648C00C5AC1D /* Settings.swift */; };
 		7CD6864720BC66CD00687BA8 /* LogTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD6864620BC66CD00687BA8 /* LogTableViewController.swift */; };
+		7CD6864D20BDF95500687BA8 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD6864C20BDF95500687BA8 /* LogViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +118,7 @@
 		7CD6679E20BA2F0500C5AC1D /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		7CD667A020BB648C00C5AC1D /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		7CD6864620BC66CD00687BA8 /* LogTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogTableViewController.swift; sourceTree = "<group>"; };
+		7CD6864C20BDF95500687BA8 /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +177,7 @@
 				7CD6679E20BA2F0500C5AC1D /* Reachability.swift */,
 				7CD667A020BB648C00C5AC1D /* Settings.swift */,
 				7CD6864620BC66CD00687BA8 /* LogTableViewController.swift */,
+				7CD6864C20BDF95500687BA8 /* LogViewController.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				7CD6864720BC66CD00687BA8 /* LogTableViewController.swift in Sources */,
 				7CD6676620B9E2DE00C5AC1D /* WebViewController.swift in Sources */,
 				7CD6679D20BA2EC000C5AC1D /* PhotoQueue.swift in Sources */,
+				7CD6864D20BDF95500687BA8 /* LogViewController.swift in Sources */,
 				7CD6679F20BA2F0500C5AC1D /* Reachability.swift in Sources */,
 				7CD6676820B9EC0E00C5AC1D /* Constants.swift in Sources */,
 				7CD667A120BB648C00C5AC1D /* Settings.swift in Sources */,

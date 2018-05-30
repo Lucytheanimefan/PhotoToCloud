@@ -20,6 +20,7 @@ class PhotoQueue: NSObject {
     }
     
     func uploadBacklog(){
+        Settings.shared.logs.append("\(Date()): Uploaded backlog of \(self.queue.count) images")
         for (i, image) in queue.enumerated(){
             guard Reachability.isConnectedToNetwork() else {
                 continue

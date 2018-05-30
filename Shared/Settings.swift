@@ -100,5 +100,9 @@ class Settings: NSObject {
         }
     }
     
+    func addLog(log:String){
+        self.logs.append("\(Date()): log")
+    }
+    
     
 }

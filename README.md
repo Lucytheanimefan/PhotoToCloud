@@ -6,9 +6,23 @@ An iOS app that automatically uploads your photos to the cloud. Made for people 
 You'll need a Constants.swift file to store your Flickr API key and secret.  
 The file would look something like this: 
 ```
-struct Flickr{
-    static let APIKEY = "<API KEY>"
-    static let APISECRET = "<API SECRET>"
+import Foundation
+
+struct Constants{
+    struct Flickr{
+        static let APIKEY = "<API KEY>"
+        static let APISECRET = "<API SECRET>"
+
+
+        static let safe = 1
+        static let moderate = 2
+        static let restricted = 3
+
+    }
+
+    struct Google{
+        static let CLIENTID = <CLIENTID retrieved from credentials.plist from google app creation>
+    }
 }
 ```
 

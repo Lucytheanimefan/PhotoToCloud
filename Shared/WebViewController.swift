@@ -127,6 +127,11 @@ class WebViewController: UIViewController {
         
     }
     
+    @IBAction func cancel(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
 }
 
 extension WebViewController: GIDSignInUIDelegate, GIDSignInDelegate{
@@ -204,7 +209,8 @@ extension WebViewController: WKNavigationDelegate{
                                                       message: "Successfully authenticated your Flickr account",
                                                       preferredStyle: .alert)
                         let okAction = UIAlertAction(title: "Ok", style: .default, handler: { (action) in
-                            self.performSegue(withIdentifier: "toMainView", sender: self)
+                            self.dismiss(animated: true, completion: nil)
+                            //self.performSegue(withIdentifier: "toMainView", sender: self)
                         })
                         alert.addAction(okAction)
                         self.present(alert, animated: true, completion: nil)

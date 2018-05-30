@@ -22,14 +22,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Pf-d1-KvY">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <wkWebView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Pf-d1-KvY">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="53G-Ho-u3M">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Title" id="pUL-TG-BPf">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Esn-1F-ddt">
+                                            <connections>
+                                                <action selector="cancel:" destination="eal-ti-Wp2" id="T3D-7w-bHG"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -41,14 +54,13 @@
                     </view>
                     <connections>
                         <outlet property="webView" destination="1Pf-d1-KvY" id="29y-7y-Tdd"/>
-                        <segue destination="Pv9-b9-vCH" kind="presentation" identifier="toMainView" id="ctz-o9-MgA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xlL-nh-TNC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="590" y="-1119"/>
+            <point key="canvasLocation" x="596" y="-1146"/>
         </scene>
-        <!--Authentication View Controller-->
+        <!--Accounts-->
         <scene sceneID="Phv-na-bxU">
             <objects>
                 <viewController storyboardIdentifier="authenticationView" id="dSR-Rn-id7" customClass="AuthenticationViewController" customModule="PhotoToCloud" customModuleProvider="target" sceneMemberID="viewController">
@@ -61,7 +73,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="Flickr" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wO0-xa-xsI">
-                                <rect key="frame" x="169" y="28" width="37" height="30"/>
+                                <rect key="frame" x="169" y="48" width="37" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Flickr"/>
                                 <connections>
@@ -69,7 +81,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="Google" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nid-rZ-kX4">
-                                <rect key="frame" x="162" y="66" width="50" height="30"/>
+                                <rect key="frame" x="162" y="115" width="50" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Google"/>
                                 <connections>
@@ -79,14 +91,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Accounts" id="qbi-h3-Whv"/>
                     <connections>
                         <segue destination="eal-ti-Wp2" kind="presentation" identifier="toWebView" id="6Ge-6o-H45"/>
-                        <segue destination="Pv9-b9-vCH" kind="presentation" identifier="toMainView" id="04g-X9-n4g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z3j-l7-7UB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-730.39999999999998" y="-1119.4902548725638"/>
+            <point key="canvasLocation" x="-730" y="-1145"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="CLV-EX-bUB">
@@ -100,13 +112,14 @@
                     <connections>
                         <segue destination="Pv9-b9-vCH" kind="relationship" relationship="viewControllers" id="qZJ-mp-cQI"/>
                         <segue destination="jaj-zo-MKm" kind="relationship" relationship="viewControllers" id="dJk-Vj-fH1"/>
+                        <segue destination="dSR-Rn-id7" kind="relationship" relationship="viewControllers" id="cZG-0T-HBd"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LGz-qh-1Fd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2119" y="-313"/>
         </scene>
-        <!--Item-->
+        <!--Main-->
         <scene sceneID="TuO-kg-RSh">
             <objects>
                 <viewController id="Pv9-b9-vCH" customClass="MainViewController" customModule="PhotoToCloud" customModuleProvider="target" sceneMemberID="viewController">
@@ -125,25 +138,17 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Id2-lW-HJS">
-                                <rect key="frame" x="137" y="567" width="100" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Authentication"/>
-                                <connections>
-                                    <segue destination="dSR-Rn-id7" kind="presentation" id="UKL-gL-bIn"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="dz2-eq-Pck"/>
+                    <tabBarItem key="tabBarItem" title="Main" id="dz2-eq-Pck"/>
                     <connections>
                         <outlet property="loginStatusTextView" destination="eId-ch-a8b" id="CdQ-2t-DZ3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dfX-A3-GwO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-729" y="-313"/>
+            <point key="canvasLocation" x="-730" y="-313"/>
         </scene>
         <!--Logs-->
         <scene sceneID="Xxa-go-0xz">
@@ -179,7 +184,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S1f-SJ-64x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-934" y="438"/>
+            <point key="canvasLocation" x="-730" y="626"/>
         </scene>
         <!--Log View Controller-->
         <scene sceneID="ug2-CG-D2b">
@@ -229,10 +234,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0ao-PN-33a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-130.40000000000001" y="437.63118440779613"/>
+            <point key="canvasLocation" x="596" y="626"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="ctz-o9-MgA"/>
-    </inferredMetricsTieBreakers>
 </document>

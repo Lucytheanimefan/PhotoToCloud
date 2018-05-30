@@ -8,6 +8,7 @@
 
 import UIKit
 import FlickrKit
+import GoogleSignIn
 
 class MainViewController: UIViewController {
     @IBOutlet weak var loginStatusTextView: UITextView!
@@ -32,6 +33,8 @@ class MainViewController: UIViewController {
     }
     
     func updateLoginStatus(){
+        
+        // Flickr
         FlickrKit.shared().checkAuthorization { (username, auth, name, error) in
             DispatchQueue.main.async {
                 if (error != nil){
@@ -42,6 +45,13 @@ class MainViewController: UIViewController {
                 }
             }
         }
+        
+        // Google
+        print(GIDSignIn.sharedInstance().hasAuthInKeychain())
+        if GIDSignIn.sharedInstance().hasAuthInKeychain() {
+            self.loginStatusTextView.text = self.loginStatusTextView.text + "\nLogged in as \(GIDSignIn.sharedInstance().currentUser.profile.email)"
+        }
+        
     }
 
     /*

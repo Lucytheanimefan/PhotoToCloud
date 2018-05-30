@@ -37,7 +37,9 @@ class MainViewController: UIViewController {
                 if (error != nil){
                     self.loginStatusTextView.text = error?.localizedDescription
                 }
-                self.loginStatusTextView.text = "Logged in on Flickr with username \(username!) as \(name!)"
+                else{
+                    self.loginStatusTextView.text = "Logged in on Flickr with username \(username!) as \(name!)"
+                }
             }
         }
     }

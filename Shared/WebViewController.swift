@@ -40,10 +40,11 @@ class WebViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if (selectedAuth == "Flickr"){
+            webView.isHidden = false
             setUpFlickr()
         }
         else if (selectedAuth == "Google"){
-            webView.removeFromSuperview()
+            webView.isHidden = true
             setupGoogle()
             // Add the sign-in button.
             view.addSubview(signInButton)
@@ -69,13 +70,22 @@ class WebViewController: UIViewController {
                 print("\(username), \(b), \(c)")
                 DispatchQueue.main.async {
                     let alert = UIAlertController(title: "Already authenticated",
-                                                  message: "Logged in as \(username)",
+                                                  message: "Logged in as \(username!)",
                         preferredStyle: .alert)
                     let okAction = UIAlertAction(title: "Ok", style: .default, handler: { (action) in
-                        self.performSegue(withIdentifier: "toMainView", sender: self)
+                        self.dismiss(animated: true, completion: {
+                            print("Dismissed")
+                        })
+                    })
+                    
+                    let loginAction = UIAlertAction(title: "Continue with login", style: .default, handler: { (action) in
+                        self.dismiss(animated: true, completion: {
+                            self.auth()
+                        })
                     })
                     // TODO: continue to login anyway action
                     alert.addAction(okAction)
+                    alert.addAction(loginAction)
                     self.present(alert, animated: true, completion: nil)
                 }
             }
@@ -94,16 +104,25 @@ class WebViewController: UIViewController {
         
         let callbackURLString = "flickrkit://auth"
         let url = URL(string: callbackURLString)
+        
         FlickrKit.shared().beginAuth(withCallbackURL: url!, permission: FKPermission.delete, completion: { (url, error) -> Void in
-            DispatchQueue.main.async(execute: { () -> Void in
-                if let error = error?.localizedDescription{
-                    print(error)
-                    Settings.shared.logs.append("\(Date()): Error authenticating: \(error)")
-                }else{
-                    let urlRequest = NSMutableURLRequest(url: url!, cachePolicy: NSURLRequest.CachePolicy.useProtocolCachePolicy, timeoutInterval: 30)
+            print(error)
+            print(url)
+            if (error != nil){
+                print(error.debugDescription)
+                Settings.shared.logs.append("\(Date()): Error authenticating: \(error.debugDescription)")
+//                DispatchQueue.main.async {
+//                    self.showAlert(title: "Error authenticating", message: error.debugDescription)
+//                }
+            } else if let url = url{
+                print(url)
+                DispatchQueue.main.async(execute: { () -> Void in
+                    
+                    let urlRequest = NSMutableURLRequest(url: url, cachePolicy: NSURLRequest.CachePolicy.useProtocolCachePolicy, timeoutInterval: 30)
                     self.webView.load(urlRequest as URLRequest)
-                }
-            });
+                    
+                })
+            }
         })
         
     }
@@ -114,6 +133,8 @@ extension WebViewController: GIDSignInUIDelegate, GIDSignInDelegate{
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if let error = error {
             self.showAlert(title: "Authentication Error", message: error.localizedDescription)
+            print(error.localizedDescription)
+            Settings.shared.logs.append("\(Date()): Google auth error: \(error.localizedDescription)")
             self.service.authorizer = nil
         } else {
             self.signInButton.isHidden = true
@@ -145,7 +166,7 @@ extension WebViewController: GIDSignInUIDelegate, GIDSignInDelegate{
         
         var text = "";
         if let files = result.files, !files.isEmpty {
-            text += "Files:\n"
+            text += "10 most recent files:\n"
             for file in files {
                 text += "\(file.name!) (\(file.identifier!))\n"
             }

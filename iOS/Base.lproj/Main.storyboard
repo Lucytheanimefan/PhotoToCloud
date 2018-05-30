@@ -41,11 +41,12 @@
                     </view>
                     <connections>
                         <outlet property="webView" destination="1Pf-d1-KvY" id="29y-7y-Tdd"/>
+                        <segue destination="Pv9-b9-vCH" kind="presentation" identifier="toMainView" id="ctz-o9-MgA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xlL-nh-TNC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="296.80000000000001" y="-1119.4902548725638"/>
+            <point key="canvasLocation" x="590" y="-1119"/>
         </scene>
         <!--Authentication View Controller-->
         <scene sceneID="Phv-na-bxU">
@@ -232,6 +233,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="04g-X9-n4g"/>
+        <segue reference="ctz-o9-MgA"/>
     </inferredMetricsTieBreakers>
 </document>

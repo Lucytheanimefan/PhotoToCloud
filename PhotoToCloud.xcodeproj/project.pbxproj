@@ -14,75 +14,13 @@
 		7CD6676620B9E2DE00C5AC1D /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD6676520B9E2DE00C5AC1D /* WebViewController.swift */; };
 		7CD6676820B9EC0E00C5AC1D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD6676720B9EC0E00C5AC1D /* Constants.swift */; };
 		7CD6676A20B9EC8C00C5AC1D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD6676920B9EC8C00C5AC1D /* MainViewController.swift */; };
-		7CD6678420B9EE1100C5AC1D /* libFlickrKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CD6677520B9EDBF00C5AC1D /* libFlickrKit.a */; };
-		7CD6678720B9EEA000C5AC1D /* libFlickrKit.a in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7CD6677520B9EDBF00C5AC1D /* libFlickrKit.a */; };
-		7CD6678B20B9F1D500C5AC1D /* FlickrKitFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CD6677B20B9EDBF00C5AC1D /* FlickrKitFramework.framework */; };
-		7CD6678C20B9F1D500C5AC1D /* FlickrKitFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7CD6677B20B9EDBF00C5AC1D /* FlickrKitFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7CD6679D20BA2EC000C5AC1D /* PhotoQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD6679C20BA2EC000C5AC1D /* PhotoQueue.swift */; };
 		7CD6679F20BA2F0500C5AC1D /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD6679E20BA2F0500C5AC1D /* Reachability.swift */; };
 		7CD667A120BB648C00C5AC1D /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD667A020BB648C00C5AC1D /* Settings.swift */; };
 		7CD6864720BC66CD00687BA8 /* LogTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD6864620BC66CD00687BA8 /* LogTableViewController.swift */; };
 		7CD6864D20BDF95500687BA8 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD6864C20BDF95500687BA8 /* LogViewController.swift */; };
+		A4002EDFA923499A46264479 /* Pods_PhotoToCloud_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B06A0A42EECE3044D6E0F2C /* Pods_PhotoToCloud_iOS.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		7CD6677420B9EDBF00C5AC1D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7CD6676B20B9EDBF00C5AC1D /* FlickrKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 552D918C1753F8EF00BE3FEA;
-			remoteInfo = FlickrKit;
-		};
-		7CD6677620B9EDBF00C5AC1D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7CD6676B20B9EDBF00C5AC1D /* FlickrKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 553B85401BCEB24A00BF59AF;
-			remoteInfo = "FlickrKit-TV";
-		};
-		7CD6677820B9EDBF00C5AC1D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7CD6676B20B9EDBF00C5AC1D /* FlickrKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 552D919A1753F8F000BE3FEA;
-			remoteInfo = FlickrKitTests;
-		};
-		7CD6677A20B9EDBF00C5AC1D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7CD6676B20B9EDBF00C5AC1D /* FlickrKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 553B859E1BCEBBD600BF59AF;
-			remoteInfo = FlickrKitFramework;
-		};
-		7CD6677C20B9EDBF00C5AC1D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7CD6676B20B9EDBF00C5AC1D /* FlickrKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 55951D711BE6BAC9002628DB;
-			remoteInfo = FlickrModelGenerator;
-		};
-		7CD6677E20B9EDBF00C5AC1D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7CD6676B20B9EDBF00C5AC1D /* FlickrKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 6AAAF1211BC022A100EFC8E6;
-			remoteInfo = FlickrKitOSX;
-		};
-		7CD6678520B9EE9B00C5AC1D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7CD6676B20B9EDBF00C5AC1D /* FlickrKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 552D918B1753F8EF00BE3FEA;
-			remoteInfo = FlickrKit;
-		};
-		7CD6678D20B9F1D500C5AC1D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7CD6676B20B9EDBF00C5AC1D /* FlickrKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 553B859D1BCEBBD600BF59AF;
-			remoteInfo = FlickrKitFramework;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		7CD6676420B9DDF900C5AC1D /* Embed Frameworks */ = {
@@ -91,8 +29,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7CD6678C20B9F1D500C5AC1D /* FlickrKitFramework.framework in Embed Frameworks */,
-				7CD6678720B9EEA000C5AC1D /* libFlickrKit.a in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -107,18 +43,20 @@
 		118FE1211CEF0525004F2F51 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		118FE1231CEF0525004F2F51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		119E70161CF3CC1700F01BF5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		4B06A0A42EECE3044D6E0F2C /* Pods_PhotoToCloud_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoToCloud_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C6D8BF020B9D33A0024DA05 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		7C6D8BF220B9D4D00024DA05 /* PhotoToCloud-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PhotoToCloud-Bridging-Header.h"; sourceTree = "<group>"; };
 		7CD6676520B9E2DE00C5AC1D /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		7CD6676720B9EC0E00C5AC1D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7CD6676920B9EC8C00C5AC1D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		7CD6676B20B9EDBF00C5AC1D /* FlickrKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FlickrKit.xcodeproj; path = "FlickrKit-master/FlickrKit.xcodeproj"; sourceTree = "<group>"; };
 		7CD6678920B9F07400C5AC1D /* FlickrKitFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FlickrKitFramework.framework; path = "../../Library/Developer/Xcode/DerivedData/PhotoToCloud-alfghramtpxolefhksxbnorhljpl/Build/Products/Debug-iphoneos/FlickrKitFramework.framework"; sourceTree = "<group>"; };
 		7CD6679C20BA2EC000C5AC1D /* PhotoQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoQueue.swift; sourceTree = "<group>"; };
 		7CD6679E20BA2F0500C5AC1D /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		7CD667A020BB648C00C5AC1D /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		7CD6864620BC66CD00687BA8 /* LogTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogTableViewController.swift; sourceTree = "<group>"; };
 		7CD6864C20BDF95500687BA8 /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
+		A37CF4B4EE05A8ACD9FC50AA /* Pods-PhotoToCloud iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoToCloud iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoToCloud iOS/Pods-PhotoToCloud iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		EB92A04C523E3F70BC20407A /* Pods-PhotoToCloud iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoToCloud iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoToCloud iOS/Pods-PhotoToCloud iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,8 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7CD6678B20B9F1D500C5AC1D /* FlickrKitFramework.framework in Frameworks */,
-				7CD6678420B9EE1100C5AC1D /* libFlickrKit.a in Frameworks */,
+				A4002EDFA923499A46264479 /* Pods_PhotoToCloud_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,12 +74,12 @@
 		118FE1091CEF0525004F2F51 = {
 			isa = PBXGroup;
 			children = (
-				7CD6676B20B9EDBF00C5AC1D /* FlickrKit.xcodeproj */,
 				119E70161CF3CC1700F01BF5 /* README.md */,
 				118FE13C1CEF07EB004F2F51 /* Shared */,
 				118FE1141CEF0525004F2F51 /* iOS */,
 				118FE1131CEF0525004F2F51 /* Products */,
 				7C6D8BEA20B9D2F00024DA05 /* Frameworks */,
+				F5ACA35AC8AA5C5B49AB12F4 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -187,21 +124,18 @@
 			children = (
 				7CD6678920B9F07400C5AC1D /* FlickrKitFramework.framework */,
 				7C6D8BF020B9D33A0024DA05 /* SystemConfiguration.framework */,
+				4B06A0A42EECE3044D6E0F2C /* Pods_PhotoToCloud_iOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		7CD6676C20B9EDBF00C5AC1D /* Products */ = {
+		F5ACA35AC8AA5C5B49AB12F4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7CD6677520B9EDBF00C5AC1D /* libFlickrKit.a */,
-				7CD6677720B9EDBF00C5AC1D /* libFlickrKit-TV.a */,
-				7CD6677920B9EDBF00C5AC1D /* FlickrKitTests.xctest */,
-				7CD6677B20B9EDBF00C5AC1D /* FlickrKitFramework.framework */,
-				7CD6677D20B9EDBF00C5AC1D /* FlickrModelGenerator.app */,
-				7CD6677F20B9EDBF00C5AC1D /* FlickrKit.framework */,
+				A37CF4B4EE05A8ACD9FC50AA /* Pods-PhotoToCloud iOS.debug.xcconfig */,
+				EB92A04C523E3F70BC20407A /* Pods-PhotoToCloud iOS.release.xcconfig */,
 			);
-			name = Products;
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,16 +145,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 118FE1261CEF0525004F2F51 /* Build configuration list for PBXNativeTarget "PhotoToCloud iOS" */;
 			buildPhases = (
+				0FAF2851CF3ECF64E98307EA /* [CP] Check Pods Manifest.lock */,
 				118FE10E1CEF0525004F2F51 /* Sources */,
 				118FE10F1CEF0525004F2F51 /* Frameworks */,
 				118FE1101CEF0525004F2F51 /* Resources */,
 				7CD6676420B9DDF900C5AC1D /* Embed Frameworks */,
+				55940A87D0793C1C07005E4F /* [CP] Embed Pods Frameworks */,
+				C9BDE05A3E8B997BB0187FE4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				7CD6678620B9EE9B00C5AC1D /* PBXTargetDependency */,
-				7CD6678E20B9F1D500C5AC1D /* PBXTargetDependency */,
 			);
 			name = "PhotoToCloud iOS";
 			productName = SamplePhotosApp;
@@ -261,63 +196,12 @@
 			mainGroup = 118FE1091CEF0525004F2F51;
 			productRefGroup = 118FE1131CEF0525004F2F51 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 7CD6676C20B9EDBF00C5AC1D /* Products */;
-					ProjectRef = 7CD6676B20B9EDBF00C5AC1D /* FlickrKit.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				118FE1111CEF0525004F2F51 /* PhotoToCloud iOS */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		7CD6677520B9EDBF00C5AC1D /* libFlickrKit.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libFlickrKit.a;
-			remoteRef = 7CD6677420B9EDBF00C5AC1D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		7CD6677720B9EDBF00C5AC1D /* libFlickrKit-TV.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libFlickrKit-TV.a";
-			remoteRef = 7CD6677620B9EDBF00C5AC1D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		7CD6677920B9EDBF00C5AC1D /* FlickrKitTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = FlickrKitTests.xctest;
-			remoteRef = 7CD6677820B9EDBF00C5AC1D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		7CD6677B20B9EDBF00C5AC1D /* FlickrKitFramework.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = FlickrKitFramework.framework;
-			remoteRef = 7CD6677A20B9EDBF00C5AC1D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		7CD6677D20B9EDBF00C5AC1D /* FlickrModelGenerator.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = FlickrModelGenerator.app;
-			remoteRef = 7CD6677C20B9EDBF00C5AC1D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		7CD6677F20B9EDBF00C5AC1D /* FlickrKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = FlickrKit.framework;
-			remoteRef = 7CD6677E20B9EDBF00C5AC1D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		118FE1101CEF0525004F2F51 /* Resources */ = {
@@ -331,6 +215,60 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0FAF2851CF3ECF64E98307EA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PhotoToCloud iOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		55940A87D0793C1C07005E4F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-PhotoToCloud iOS/Pods-PhotoToCloud iOS-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/FlickrKit/FlickrKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FlickrKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PhotoToCloud iOS/Pods-PhotoToCloud iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C9BDE05A3E8B997BB0187FE4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PhotoToCloud iOS/Pods-PhotoToCloud iOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		118FE10E1CEF0525004F2F51 /* Sources */ = {
@@ -350,19 +288,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		7CD6678620B9EE9B00C5AC1D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = FlickrKit;
-			targetProxy = 7CD6678520B9EE9B00C5AC1D /* PBXContainerItemProxy */;
-		};
-		7CD6678E20B9F1D500C5AC1D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = FlickrKitFramework;
-			targetProxy = 7CD6678D20B9F1D500C5AC1D /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		118FE11B1CEF0525004F2F51 /* Main.storyboard */ = {
@@ -477,6 +402,7 @@
 		};
 		118FE1271CEF0525004F2F51 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A37CF4B4EE05A8ACD9FC50AA /* Pods-PhotoToCloud iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 65ZN6CM2H7;
@@ -493,6 +419,7 @@
 		};
 		118FE1281CEF0525004F2F51 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EB92A04C523E3F70BC20407A /* Pods-PhotoToCloud iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 65ZN6CM2H7;

@@ -21,6 +21,8 @@ struct Constants{
     }
     
     struct Google{
-        static let CLIENTID = "450379075900-1cnodv35q2rsehldg65hjhfuohssmbo1.apps.googleusercontent.com"
+        static let CLIENTID =
+            //"450379075900-1cnodv35q2rsehldg65hjhfuohssmbo1.apps.googleusercontent.com"
+        "450379075900-115j6845cradm4bk1h7956qpfsiqivoc.apps.googleusercontent.com"
     }
 }

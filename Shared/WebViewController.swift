@@ -29,6 +29,7 @@ class WebViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.webView.navigationDelegate = self
+         setupGoogle()
         // Do any additional setup after loading the view.
     }
     
@@ -45,11 +46,9 @@ class WebViewController: UIViewController {
         }
         else if (selectedAuth == "Google"){
             webView.isHidden = true
-            setupGoogle()
-            // Add the sign-in button.
-            view.addSubview(signInButton)
-            // Add a UITextView to display output.
-            output.frame = view.bounds
+            
+            GIDSignIn.sharedInstance().signIn()
+            
             output.isEditable = false
             output.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 20, right: 0)
             output.autoresizingMask = [.flexibleHeight, .flexibleWidth]
@@ -97,7 +96,6 @@ class WebViewController: UIViewController {
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().shouldFetchBasicProfile = true
         GIDSignIn.sharedInstance().scopes = scopes
-        GIDSignIn.sharedInstance().signIn()
     }
     
     private func auth(){
@@ -137,7 +135,7 @@ extension WebViewController: GIDSignInUIDelegate, GIDSignInDelegate{
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if let error = error {
             self.showAlert(title: "Authentication Error", message: error.localizedDescription)
-            print(error.localizedDescription)
+            print("ERROR AUTHENTICATING: \(error.localizedDescription)")
             Settings.shared.logs.append("\(Date()): Google auth error: \(error.localizedDescription)")
             self.service.authorizer = nil
         } else {

@@ -87,10 +87,8 @@ class Settings: NSObject {
     var logs:[String] {
         get {
             if let value = UserDefaults.standard.stringArray(forKey: "logs") {
-                print(value)
                 return value
             }
-            print("logs_val: \(logs_val)")
             return logs_val
         }
         set {

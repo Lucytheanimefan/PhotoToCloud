@@ -37,7 +37,6 @@ class LogTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        print("Rows: \(Settings.shared.logs.count)")
         return Settings.shared.logs.count
     }
 
@@ -57,8 +56,7 @@ class LogTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
          self.selectedLog = Settings.shared.logs[indexPath.row]
-        
-        print(selectedLog)
+
         return indexPath
     }
     /*

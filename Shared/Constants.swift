@@ -19,4 +19,8 @@ struct Constants{
         static let restricted = 3
         
     }
+    
+    struct Google{
+        static let CLIENTID = "450379075900-1cnodv35q2rsehldg65hjhfuohssmbo1.apps.googleusercontent.com"
+    }
 }

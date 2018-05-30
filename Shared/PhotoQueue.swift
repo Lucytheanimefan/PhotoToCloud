@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FlickrKit
 
 class PhotoQueue: NSObject {
     

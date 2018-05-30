@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FlickrKit
 
 class MainViewController: UIViewController {
     @IBOutlet weak var loginStatusTextView: UITextView!

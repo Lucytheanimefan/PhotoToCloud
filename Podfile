@@ -7,5 +7,7 @@ target 'PhotoToCloud iOS' do
 
   # Pods for PhotoToCloud iOS
 pod 'FlickrKit'
+pod 'GoogleAPIClientForREST/Drive', '~> 1.2.1'
+pod 'GoogleSignIn', '~> 4.1.1'
 
 end

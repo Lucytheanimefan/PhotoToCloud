@@ -10,6 +10,8 @@
 import UIKit
 import Photos
 import UserNotifications
+import FlickrKit
+import GoogleSignIn
 // import SwiftyDropbox
 
 @UIApplicationMain
@@ -52,29 +54,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     
     func setUpFlickr(){
         FlickrKit.shared().initialize(withAPIKey: Constants.Flickr.APIKEY, sharedSecret: Constants.Flickr.APISECRET)
-        FlickrKit.shared().checkAuthorization { (a, b, c, error) in
-            if (error != nil){
-                self.window?.rootViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "webView")
-            }
-            else{
-                print("Already authed")
-            }
-        }
+//        FlickrKit.shared().checkAuthorization { (a, b, c, error) in
+//            if (error != nil){
+//                self.window?.rootViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "webView")
+//            }
+//            else{
+//                print("Already authed")
+//            }
+//        }
     }
     
     func setupDropbox(){
         // DropboxClientsManager.setupWithAppKey("<APP_KEY>")
+    }
+    
+    func setupGDrive(){
+        GIDSignIn.sharedInstance().clientID = Constants.Google.CLIENTID
     }
  
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
         // Override point for customization after application launch.
         
         setUpFlickr()
+        setupGDrive()
         registerForPushNotifications()
         updateFetchResult()
         PHPhotoLibrary.shared().register(self)
         
         return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String
+        let annotation = options[UIApplicationOpenURLOptionsKey.annotation]
+        return GIDSignIn.sharedInstance().handle(url,
+                                                 sourceApplication: sourceApplication,
+                                                 annotation: annotation)
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {

@@ -23,40 +23,69 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Pf-d1-KvY">
-                                <rect key="frame" x="0.0" y="66" width="375" height="601"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7dk-4J-IQz">
-                                <rect key="frame" x="143" y="20" width="88" height="30"/>
-                                <state key="normal" title="Authenticate"/>
-                                <connections>
-                                    <action selector="authenticate:" destination="eal-ti-Wp2" eventType="touchUpInside" id="rAw-1f-xnl"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="7dk-4J-IQz" secondAttribute="trailing" id="0Ri-LU-IVY"/>
-                            <constraint firstItem="1Pf-d1-KvY" firstAttribute="leading" secondItem="bMU-1j-VTV" secondAttribute="leading" id="CQy-Bx-iDv"/>
-                            <constraint firstItem="7dk-4J-IQz" firstAttribute="top" secondItem="7mX-Od-odg" secondAttribute="bottom" id="FFP-3T-dDg"/>
-                            <constraint firstItem="7dk-4J-IQz" firstAttribute="leading" secondItem="bMU-1j-VTV" secondAttribute="leadingMargin" constant="127" id="ZmN-Vc-ZxI"/>
-                            <constraint firstAttribute="trailing" secondItem="1Pf-d1-KvY" secondAttribute="trailing" id="gFx-Cw-GaB"/>
-                            <constraint firstItem="1Pf-d1-KvY" firstAttribute="top" secondItem="7dk-4J-IQz" secondAttribute="bottom" constant="16" id="rfg-bt-HI4"/>
-                            <constraint firstItem="H7P-l8-prR" firstAttribute="top" secondItem="1Pf-d1-KvY" secondAttribute="bottom" id="wsc-GU-LKj"/>
+                            <constraint firstAttribute="trailing" secondItem="1Pf-d1-KvY" secondAttribute="trailing" id="5wo-wj-EJx"/>
+                            <constraint firstItem="1Pf-d1-KvY" firstAttribute="top" secondItem="bMU-1j-VTV" secondAttribute="top" id="jdR-Hw-NwN"/>
+                            <constraint firstItem="1Pf-d1-KvY" firstAttribute="leading" secondItem="bMU-1j-VTV" secondAttribute="leading" id="kDF-5E-cXd"/>
+                            <constraint firstItem="H7P-l8-prR" firstAttribute="top" secondItem="1Pf-d1-KvY" secondAttribute="bottom" id="qVB-Lm-SIr"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="webView" destination="1Pf-d1-KvY" id="29y-7y-Tdd"/>
-                        <segue destination="Pv9-b9-vCH" kind="presentation" identifier="toMainView" id="YOY-MZ-T2o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xlL-nh-TNC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-935.20000000000005" y="-1039.4302848575712"/>
+            <point key="canvasLocation" x="296.80000000000001" y="-1119.4902548725638"/>
+        </scene>
+        <!--Authentication View Controller-->
+        <scene sceneID="Phv-na-bxU">
+            <objects>
+                <viewController storyboardIdentifier="authenticationView" id="dSR-Rn-id7" customClass="AuthenticationViewController" customModule="PhotoToCloud" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="WDp-6s-CAi"/>
+                        <viewControllerLayoutGuide type="bottom" id="wHs-dn-WmC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="APY-17-swF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="Flickr" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wO0-xa-xsI">
+                                <rect key="frame" x="169" y="28" width="37" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Flickr"/>
+                                <connections>
+                                    <action selector="authenticate:" destination="dSR-Rn-id7" eventType="touchUpInside" id="dxo-zR-29v"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="Google" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nid-rZ-kX4">
+                                <rect key="frame" x="162" y="66" width="50" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Google"/>
+                                <connections>
+                                    <action selector="authenticate:" destination="dSR-Rn-id7" eventType="touchUpInside" id="ntP-6K-LBm"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <connections>
+                        <segue destination="eal-ti-Wp2" kind="presentation" identifier="toWebView" id="6Ge-6o-H45"/>
+                        <segue destination="Pv9-b9-vCH" kind="presentation" identifier="toMainView" id="04g-X9-n4g"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z3j-l7-7UB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-730.39999999999998" y="-1119.4902548725638"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="CLV-EX-bUB">
@@ -95,6 +124,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Id2-lW-HJS">
+                                <rect key="frame" x="137" y="567" width="100" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Authentication"/>
+                                <connections>
+                                    <segue destination="dSR-Rn-id7" kind="presentation" id="UKL-gL-bIn"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
@@ -105,7 +142,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dfX-A3-GwO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-935.20000000000005" y="-312.59370314842579"/>
+            <point key="canvasLocation" x="-729" y="-313"/>
         </scene>
         <!--Logs-->
         <scene sceneID="Xxa-go-0xz">
@@ -135,6 +172,7 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Logs" id="nBF-g1-zFo"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="skK-Yk-BKM">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                 </tableViewController>
@@ -194,6 +232,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="YOY-MZ-T2o"/>
+        <segue reference="04g-X9-n4g"/>
     </inferredMetricsTieBreakers>
 </document>

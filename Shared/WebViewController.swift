@@ -8,10 +8,23 @@
 
 import UIKit
 import WebKit
+import FlickrKit
+import GoogleAPIClientForREST
+import GoogleSignIn
 
 class WebViewController: UIViewController {
     
     @IBOutlet weak var webView: WKWebView!
+    
+    var selectedAuth:String!
+    
+    // Google
+    let signInButton = GIDSignInButton()
+    let output = UITextView()
+    
+    let scopes = [kGTLRAuthScopeDriveFile, kGTLRAuthScopeDriveReadonly]
+    
+    let service = GTLRDriveService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,22 +36,58 @@ class WebViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    @IBAction func authenticate(_ sender: UIButton) {
-        setUpFlickr()
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if (selectedAuth == "Flickr"){
+            setUpFlickr()
+        }
+        else if (selectedAuth == "Google"){
+            webView.removeFromSuperview()
+            setupGoogle()
+            // Add the sign-in button.
+            view.addSubview(signInButton)
+            // Add a UITextView to display output.
+            output.frame = view.bounds
+            output.isEditable = false
+            output.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
+            output.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+            output.isHidden = true
+            view.addSubview(output);
+        }
     }
     
     func setUpFlickr(){
-        FlickrKit.shared().initialize(withAPIKey: Constants.Flickr.APIKEY, sharedSecret: Constants.Flickr.APISECRET)
+        //FlickrKit.shared().initialize(withAPIKey: Constants.Flickr.APIKEY, sharedSecret: Constants.Flickr.APISECRET)
         
-        FlickrKit.shared().checkAuthorization(onCompletion: { (a, b, c, error) in
+        FlickrKit.shared().checkAuthorization(onCompletion: { (username, b, c, error) in
             print("Check auth:")
             if (error != nil){
                 self.auth()
             }
             else{
-                print("\(a), \(b), \(c)")
+                print("\(username), \(b), \(c)")
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "Already authenticated",
+                                                  message: "Logged in as \(username)",
+                        preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+                        self.performSegue(withIdentifier: "toMainView", sender: self)
+                    })
+                    // TODO: continue to login anyway action
+                    alert.addAction(okAction)
+                    self.present(alert, animated: true, completion: nil)
+                }
             }
         })
+    }
+    
+    func setupGoogle(){
+        // Configure Google Sign-in.
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().scopes = scopes
+        GIDSignIn.sharedInstance().signInSilently()
     }
     
     private func auth(){
@@ -61,6 +110,51 @@ class WebViewController: UIViewController {
     
 }
 
+extension WebViewController: GIDSignInUIDelegate, GIDSignInDelegate{
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if let error = error {
+            self.showAlert(title: "Authentication Error", message: error.localizedDescription)
+            self.service.authorizer = nil
+        } else {
+            self.signInButton.isHidden = true
+            self.output.isHidden = false
+            self.service.authorizer = user.authentication.fetcherAuthorizer()
+            listFiles()
+        }
+    }
+    
+    // List up to 10 files in Drive
+    func listFiles() {
+        let query = GTLRDriveQuery_FilesList.query()
+        query.pageSize = 10
+        service.executeQuery(query,
+                             delegate: self,
+                             didFinish: #selector(displayResultWithTicket(ticket:finishedWithObject:error:))
+        )
+    }
+    
+    // Process the response and display output
+    func displayResultWithTicket(ticket: GTLRServiceTicket,
+                                 finishedWithObject result : GTLRDrive_FileList,
+                                 error : NSError?) {
+        
+        if let error = error {
+            showAlert(title: "Error", message: error.localizedDescription)
+            return
+        }
+        
+        var text = "";
+        if let files = result.files, !files.isEmpty {
+            text += "Files:\n"
+            for file in files {
+                text += "\(file.name!) (\(file.identifier!))\n"
+            }
+        } else {
+            text += "No files found."
+        }
+        output.text = text
+    }
+}
 
 extension WebViewController: WKNavigationDelegate{
     
@@ -103,5 +197,6 @@ extension WebViewController: WKNavigationDelegate{
             
         }
     }
-    
+
 }
+

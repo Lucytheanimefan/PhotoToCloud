@@ -22,7 +22,7 @@ class WebViewController: UIViewController {
     let signInButton = GIDSignInButton()
     let output = UITextView()
     
-    let scopes = [kGTLRAuthScopeDriveFile, kGTLRAuthScopeDriveReadonly]
+    let scopes = [kGTLRAuthScopeDriveFile, kGTLRAuthScopeDrive]
     
     let service = GTLRDriveService()
     
@@ -51,7 +51,7 @@ class WebViewController: UIViewController {
             // Add a UITextView to display output.
             output.frame = view.bounds
             output.isEditable = false
-            output.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
+            output.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 20, right: 0)
             output.autoresizingMask = [.flexibleHeight, .flexibleWidth]
             output.isHidden = true
             view.addSubview(output);
@@ -67,7 +67,6 @@ class WebViewController: UIViewController {
                 self.auth()
             }
             else{
-                print("\(username), \(b), \(c)")
                 DispatchQueue.main.async {
                     let alert = UIAlertController(title: "Already authenticated",
                                                   message: "Logged in as \(username!)",
@@ -96,8 +95,9 @@ class WebViewController: UIViewController {
         // Configure Google Sign-in.
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().shouldFetchBasicProfile = true
         GIDSignIn.sharedInstance().scopes = scopes
-        GIDSignIn.sharedInstance().signInSilently()
+        GIDSignIn.sharedInstance().signIn()
     }
     
     private func auth(){
@@ -106,11 +106,10 @@ class WebViewController: UIViewController {
         let url = URL(string: callbackURLString)
         
         FlickrKit.shared().beginAuth(withCallbackURL: url!, permission: FKPermission.delete, completion: { (url, error) -> Void in
-            print(error)
-            print(url)
-            if (error != nil){
-                print(error.debugDescription)
-                Settings.shared.logs.append("\(Date()): Error authenticating: \(error.debugDescription)")
+            
+            if let error = error{
+                print("\(self.description): \(error)")
+                Settings.shared.logs.append("\(Date()): Error authenticating: \(error.localizedDescription)")
 //                DispatchQueue.main.async {
 //                    self.showAlert(title: "Error authenticating", message: error.debugDescription)
 //                }
@@ -194,16 +193,15 @@ extension WebViewController: WKNavigationDelegate{
         //If URL scheme matches then try to do the Auth process
         if "flickrkit" == scheme{
             
-            FlickrKit.shared().completeAuth(with: url) { (a, b, c, error) in
+            FlickrKit.shared().completeAuth(with: url) { (username, b, c, error) in
                 print("Complete auth:")
-                if (error != nil){
+                if let error = error{
                     print(error)
-                    Settings.shared.logs.append("\(Date()): Error completing auth: \(error!.localizedDescription)")
+                    Settings.shared.logs.append("\(Date()): Error completing auth: \(error.localizedDescription)")
                     decisionHandler(.cancel)
                 }
-                else{
-                    print("\(a), \(b), \(c)")
-                    Settings.shared.logs.append("\(Date()): Successfully authenticated \(a)'s Flickr account")
+                else if let username = username{
+                    Settings.shared.logs.append("\(Date()): Successfully authenticated \(username)'s Flickr account")
                     DispatchQueue.main.async {
                         let alert = UIAlertController(title: "Success",
                                                       message: "Successfully authenticated your Flickr account",

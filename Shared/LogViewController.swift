@@ -15,7 +15,6 @@ class LogViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(log)
         self.logTextView.text = log!
         // Do any additional setup after loading the view.
     }

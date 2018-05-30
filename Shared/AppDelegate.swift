@@ -274,7 +274,7 @@ extension AppDelegate: PHPhotoLibraryChangeObserver {
                             PhotoQueue.shared.queue.append(image)
                             return
                         }
-                        uploadImageToFlickr(image: image)
+                        //uploadImageToFlickr(image: image)
                         uploadImageToGDrive(image: image)
                     }
                 }

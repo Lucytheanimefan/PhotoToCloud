@@ -57,6 +57,11 @@ class MainViewController: UIViewController {
         PhotoQueue.shared.uploadBacklog()
     }
     
+    @IBAction func testUpload(_ sender: UIButton) {
+        let image = #imageLiteral(resourceName: "penguinOctopus")
+        
+    }
+    
     /*
     // MARK: - Navigation
 

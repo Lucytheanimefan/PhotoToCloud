@@ -23,27 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     var window: UIWindow?
     var fetchResult: PHFetchResult<PHAsset>!
     
-    func uploadImageToFlickr(image:UIImage){
-        
-        print("Upload Flickr image with settings: \(Settings.shared.flickrArgs)")
-        FlickrKit.shared().uploadImage(image, args: Settings.shared.flickrArgs) { (result, error) in
-            if (error != nil){
-                Settings.shared.logs.append("\(Date()): Error uploading image: \(error!.localizedDescription)")
-                print("Error uploading image: \(error!.localizedDescription)")
-            }
-            else
-            {
-                #if DEBUG
-                print(result.debugDescription)
-                self.doNotifications(title: "Successful upload", body: "Uploaded image to Flickr")
-                #endif
-                Settings.shared.logs.append("\(Date()): Uploaded image to Flickr")
-            }
-        }
-    }
-    
-    
-    
     func tryBacklog(){
         guard PhotoQueue.shared.isBacklog() else {return}
         #if DEBUG
@@ -211,8 +190,7 @@ extension AppDelegate: PHPhotoLibraryChangeObserver {
                             PhotoQueue.shared.queue.append(image)
                             return
                         }
-                        //uploadImageToFlickr(image: image)
-                        UploadManager.uploadImageToGDrive(image: image)
+                        UploadManager.uploadImage(image: image)
                     }
                 }
                 

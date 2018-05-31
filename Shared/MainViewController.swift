@@ -59,7 +59,7 @@ class MainViewController: UIViewController {
     
     @IBAction func testUpload(_ sender: UIButton) {
         let image = #imageLiteral(resourceName: "penguinOctopus")
-        
+        UploadManager.uploadImageSync(image: image)
     }
     
     /*

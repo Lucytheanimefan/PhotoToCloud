@@ -53,7 +53,10 @@ class MainViewController: UIViewController {
         }
         
     }
-
+    @IBAction func uploadPhotoBacklog(_ sender: UIButton) {
+        PhotoQueue.shared.uploadBacklog()
+    }
+    
     /*
     // MARK: - Navigation
 

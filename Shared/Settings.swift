@@ -12,15 +12,32 @@ protocol LogDelegate{
     func onAddLog()
 }
 
+protocol AccountDelegate{
+    func onChangeActiveAccounts()
+}
+
 class Settings: NSObject {
     
     static let shared = Settings()
     
     var logDelegate:LogDelegate?
+    var accountDelegate: AccountDelegate?
     
     lazy var flickrArgs = {
         return ["is_public":self.is_public.description, "is_friend":self.is_friend.description, "is_family":self.is_family.description, "safety_level":self.safety_level.description]
     }()
+    
+    private var current_accounts_val = ["Flickr": false, "Google":true]
+    
+    var current_accounts:[String:Bool] {
+        get {
+            return self.current_accounts_val
+        }
+        set{
+            self.current_accounts_val = newValue
+            self.accountDelegate?.onChangeActiveAccounts()
+        }
+    }
     
     private var is_public_val = 0
     var is_public: Int {

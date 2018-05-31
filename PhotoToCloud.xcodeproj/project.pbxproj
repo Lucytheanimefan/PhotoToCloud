@@ -21,6 +21,7 @@
 		7CD667A120BB648C00C5AC1D /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD667A020BB648C00C5AC1D /* Settings.swift */; };
 		7CD6864720BC66CD00687BA8 /* LogTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD6864620BC66CD00687BA8 /* LogTableViewController.swift */; };
 		7CD6864D20BDF95500687BA8 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD6864C20BDF95500687BA8 /* LogViewController.swift */; };
+		7CD9767D20C07A77009B91E3 /* UploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD9767C20C07A77009B91E3 /* UploadManager.swift */; };
 		A4002EDFA923499A46264479 /* Pods_PhotoToCloud_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B06A0A42EECE3044D6E0F2C /* Pods_PhotoToCloud_iOS.framework */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,7 @@
 		7CD667A020BB648C00C5AC1D /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		7CD6864620BC66CD00687BA8 /* LogTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogTableViewController.swift; sourceTree = "<group>"; };
 		7CD6864C20BDF95500687BA8 /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
+		7CD9767C20C07A77009B91E3 /* UploadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadManager.swift; sourceTree = "<group>"; };
 		A37CF4B4EE05A8ACD9FC50AA /* Pods-PhotoToCloud iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoToCloud iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoToCloud iOS/Pods-PhotoToCloud iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		EB92A04C523E3F70BC20407A /* Pods-PhotoToCloud iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoToCloud iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoToCloud iOS/Pods-PhotoToCloud iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -119,6 +121,7 @@
 				7CD6864C20BDF95500687BA8 /* LogViewController.swift */,
 				7C5003DE20BEE1240098DB3A /* AuthenticationViewController.swift */,
 				7C5003E020BEE7E70098DB3A /* Extensions.swift */,
+				7CD9767C20C07A77009B91E3 /* UploadManager.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 			files = (
 				7CD6864720BC66CD00687BA8 /* LogTableViewController.swift in Sources */,
 				7CD6676620B9E2DE00C5AC1D /* WebViewController.swift in Sources */,
+				7CD9767D20C07A77009B91E3 /* UploadManager.swift in Sources */,
 				7C5003DF20BEE1240098DB3A /* AuthenticationViewController.swift in Sources */,
 				7CD6679D20BA2EC000C5AC1D /* PhotoQueue.swift in Sources */,
 				7CD6864D20BDF95500687BA8 /* LogViewController.swift in Sources */,

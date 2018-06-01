@@ -22,7 +22,7 @@ class WebViewController: UIViewController {
     let signInButton = GIDSignInButton()
     let output = UITextView()
     
-    let scopes = [kGTLRAuthScopeDrive]
+    let scopes = [kGTLRAuthScopeDrive, kGTLRAuthScopeDriveFile, kGTLRAuthScopeDriveAppdata]
     
     let service = GTLRDriveService()
     

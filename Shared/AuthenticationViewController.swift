@@ -27,6 +27,11 @@ class AuthenticationViewController: UIViewController {
         self.performSegue(withIdentifier: "toWebView", sender: self)
     }
     
+    @IBAction func activateSwitch(_ sender: UISwitch) {
+        let account = sender.restorationIdentifier!.components(separatedBy: "_")[0]
+        print("Activated: \(account)")
+        Settings.shared.current_accounts[account] = sender.isOn
+    }
     
     // MARK: - Navigation
 

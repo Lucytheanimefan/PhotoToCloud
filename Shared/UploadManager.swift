@@ -22,7 +22,7 @@ class UploadManager: NSObject {
             uploadImageToGDrive(image: image)
         }
         if (Settings.shared.current_accounts["Flickr"]!){
-            uploadImageToGDrive(image: image)
+            uploadImageToFlickr(image: image)
         }
     }
     
@@ -69,6 +69,11 @@ class UploadManager: NSObject {
         print("\(self.description): Start upload image to GDrive")
         guard let fileData = UIImagePNGRepresentation(image) else {
             print("No image data")
+            return
+        }
+        
+        guard driveService != nil else {
+            print("Google drive service is nil")
             return
         }
         

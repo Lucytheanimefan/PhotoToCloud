@@ -60,12 +60,12 @@ class MainViewController: UIViewController {
     
     @IBAction func testUpload(_ sender: UIButton) {
         let image = #imageLiteral(resourceName: "penguinOctopus")
-        UploadManager.shared.uploadImageToGDrive(image: image, progressBlock: { (bytesRead, dataLength) in
-            self.progressView.setProgress(Float(bytesRead/dataLength), animated: true)
-        }) {
-            print("DONE")
-        }
-        //UploadManager.uploadImageSync(image: image)
+//        UploadManager.shared.uploadImageToGDrive(image: image, progressBlock: { (bytesRead, dataLength) in
+//            self.progressView.setProgress(Float(bytesRead/dataLength), animated: true)
+//        }) {
+//            print("DONE")
+//        }
+        UploadManager.shared.uploadImage(image: image)
     }
     
     /*

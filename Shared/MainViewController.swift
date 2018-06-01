@@ -13,6 +13,7 @@ import GoogleSignIn
 class MainViewController: UIViewController {
     @IBOutlet weak var loginStatusTextView: UITextView!
     
+    @IBOutlet weak var progressView: UIProgressView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,7 +60,12 @@ class MainViewController: UIViewController {
     
     @IBAction func testUpload(_ sender: UIButton) {
         let image = #imageLiteral(resourceName: "penguinOctopus")
-        UploadManager.uploadImageSync(image: image)
+        UploadManager.uploadImageToGDrive(image: image, progressBlock: { (bytesRead, dataLength) in
+            self.progressView.setProgress(Float(bytesRead/dataLength), animated: true)
+        }) {
+            print("DONE")
+        }
+        //UploadManager.uploadImageSync(image: image)
     }
     
     /*

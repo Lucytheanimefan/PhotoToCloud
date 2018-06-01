@@ -13,6 +13,8 @@ import GoogleAPIClientForREST
 
 class UploadManager: NSObject {
     
+    static let driveService = GTLRDriveService()
+    
     static func uploadImage(image:UIImage){
         if (Settings.shared.current_accounts["Google"]!){
             uploadImageToGDrive(image: image)
@@ -61,7 +63,8 @@ class UploadManager: NSObject {
         }
     }
     
-    static func uploadImageToGDrive(image: UIImage, completion: (() -> ())? = nil){
+    static func uploadImageToGDrive(image: UIImage, progressBlock: ((_ bytesRead:UInt64, _ dataLength: UInt64) -> ())? = nil, completion: (() -> ())? = nil){
+        print("\(self.description()): Start upload image to GDrive")
         guard let fileData = UIImagePNGRepresentation(image) else {
             print("No image data")
             return
@@ -77,12 +80,17 @@ class UploadManager: NSObject {
         
         let uploadParams = GTLRUploadParameters(data: fileData, mimeType: mimeType)
         
-        let driveService = GTLRDriveService()
-        
         let query = GTLRDriveQuery_FilesCreate.query(withObject: gFile, uploadParameters: uploadParams)
         
-        driveService.executeQuery(query, completionHandler:  { (ticket, insertedFile , error) -> Void in
-            
+        query.executionParameters.uploadProgressBlock = { (ticket, numBytesRead, dataLength) -> Void in
+            if let block = progressBlock{
+                block(numBytesRead, dataLength)
+            }
+        }
+        self.driveService.executeQuery(query, completionHandler:  { (ticket, insertedFile , error) -> Void in
+            print(error?.localizedDescription)
+            print(ticket.description)
+            print(insertedFile)
             if error == nil, let myFile = insertedFile as? GTLRDrive_File {
                 print("GDrive success: \(myFile.identifier)")
                 Settings.shared.addLog(log: "Uploaded image \(myFile.identifier) to GDrive")

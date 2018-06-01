@@ -22,7 +22,7 @@ class WebViewController: UIViewController {
     let signInButton = GIDSignInButton()
     let output = UITextView()
     
-    let scopes = [kGTLRAuthScopeDriveFile, kGTLRAuthScopeDrive]
+    let scopes = [kGTLRAuthScopeDrive]
     
     let service = GTLRDriveService()
     
@@ -143,6 +143,7 @@ extension WebViewController: GIDSignInUIDelegate, GIDSignInDelegate{
             self.output.isHidden = false
             self.service.authorizer = user.authentication.fetcherAuthorizer()
             listFiles()
+            //self.dismiss(animated: true, completion: nil)
         }
     }
     
@@ -172,6 +173,7 @@ extension WebViewController: GIDSignInUIDelegate, GIDSignInDelegate{
             for file in files {
                 text += "\(file.name!) (\(file.identifier!))\n"
             }
+            print(files)
         } else {
             text += "No files found."
         }

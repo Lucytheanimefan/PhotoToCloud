@@ -112,5 +112,56 @@ class UploadManager: NSObject {
         })
 
     }
-
+    func findGDrivePhotoFolder()->Bool{
+        var found:Bool = false
+        
+        let query = GTLRDriveQuery_FilesList.query()
+        query.q = "mimeType='application/vnd.google-apps.folder' and name contains 'iPhonePhotos'"
+        query.spaces = "drive"
+        query.fields = "nextPageToken, files(id, name)"
+        
+        self.driveService.executeQuery(query) { (ticket, folders, error) in
+            
+        }
+        
+//        GTLRDriveQuery_FilesList *query = [GTLRDriveQuery_FilesList query];
+//        query.q = @"mimeType='image/jpeg'";
+//        query.spaces = @"drive";
+//        query.fields = @"nextPageToken, files(id, name)";
+//        [driveService executeQuery:query completionHandler:^(GTLRServiceTicket *ticket,
+//            GTLRDrive_FileList *files,
+//            NSError *error) {
+//            if (error == nil) {
+//            for(GTLRDrive_File *file in files) {
+//            NSLog(@"Found file: %@ (%@)", file.name, file.identifier);
+//            }
+//            } else {
+//            NSLog(@"An error occurred: %@", error);
+//            }
+//            }];
+        
+        return found
+    }
+    
+    func createGDrivePhotoFolder(completion: (()->())? = nil){
+        let metadata = GTLRDrive_File()
+        metadata.name = "iPhonePhotos"
+        
+        metadata.mimeType = "application/vnd.google-apps.folder"
+        let querys = GTLRDriveQuery_FilesCreate.query(withObject: metadata, uploadParameters: nil)
+        querys.fields = "id"
+        
+        self.driveService.executeQuery(querys, completionHandler: {(ticket:GTLRServiceTicket, object:Any?, error:Error?) in
+            
+            if let error = error{
+                Settings.shared.addLog(log: "Error creating GDrive folder: \(error.localizedDescription)")
+            }
+            else{
+                Settings.shared.addLog(log: "Created GDrive folder")
+            }
+            completion?()
+        })
+        
+    }
+    
 }

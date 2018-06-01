@@ -17,7 +17,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        updateLoginStatus()
+        // updateLoginStatus()
         // Do any additional setup after loading the view.
     }
 
@@ -31,6 +31,7 @@ class MainViewController: UIViewController {
         #if DEBUG
         Settings.shared.logs.append("\(Date()): Accessed main view")
         #endif
+        updateLoginStatus()
     }
     
     func updateLoginStatus(){
@@ -44,14 +45,22 @@ class MainViewController: UIViewController {
                 else{
                     self.loginStatusTextView.text = "Logged in on Flickr with username \(username!) as \(name!)"
                 }
+                self.loginStatusTextView.text = self.loginStatusTextView.text + "\n" + ((GIDSignIn.sharedInstance().hasAuthInKeychain()) ? "Logged into Google" : "Not logged into Google")
             }
         }
         
         // Google
-        print(GIDSignIn.sharedInstance().hasAuthInKeychain())
-        if GIDSignIn.sharedInstance().hasAuthInKeychain() {
-            self.loginStatusTextView.text = self.loginStatusTextView.text + "\nLogged in as \(GIDSignIn.sharedInstance().currentUser.profile.email)"
-        }
+//        print(GIDSignIn.sharedInstance().hasAuthInKeychain())
+//        if GIDSignIn.sharedInstance().hasAuthInKeychain() {
+//            if (GIDSignIn.sharedInstance().currentUser != nil){
+//                if let email = GIDSignIn.sharedInstance().currentUser.profile.email{
+//                    self.loginStatusTextView.text = self.loginStatusTextView.text + "\nLogged in as \(email)"
+//                }
+//            }
+//            else{
+//                self.loginStatusTextView.text = self.loginStatusTextView.text + "\nLogged into Google"
+//            }
+//        }
         
     }
     @IBAction func uploadPhotoBacklog(_ sender: UIButton) {

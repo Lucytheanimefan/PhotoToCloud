@@ -47,14 +47,30 @@ class WebViewController: UIViewController {
         }
         else if (selectedAuth == "Google"){
             webView.isHidden = true
-            
-            GIDSignIn.sharedInstance().signIn()
-            
-            output.isEditable = false
-            output.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 20, right: 0)
-            output.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-            output.isHidden = true
-            view.addSubview(output);
+            if (GIDSignIn.sharedInstance().hasAuthInKeychain()){
+                let alert = UIAlertController(
+                    title: "Authentication",
+                    message: "Already logged into Google",
+                    preferredStyle: UIAlertControllerStyle.alert
+                )
+                let ok = UIAlertAction(title: "Ok", style: .default) { (action) in
+                    self.dismiss(animated: true, completion: {
+                        
+                    })
+                }
+                alert.addAction(ok)
+                self.present(alert, animated: true, completion: nil)
+            }
+            else
+            {
+                GIDSignIn.sharedInstance().signIn()
+                
+                output.isEditable = false
+                output.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 20, right: 0)
+                output.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+                output.isHidden = true
+                view.addSubview(output);
+            }
         }
     }
     

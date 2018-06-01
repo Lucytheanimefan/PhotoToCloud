@@ -26,7 +26,7 @@ class PhotoQueue: NSObject {
                 continue
             }
             
-            UploadManager.uploadImageSync(image: image)
+            UploadManager.shared.uploadImageSync(image: image)
             self.queue.remove(at: (i-1))
 //            if (Settings.shared.current_accounts["Flickr"])!{
 //            FlickrKit.shared().uploadImage(image, args: Settings.shared.flickrArgs) { (result, error) in

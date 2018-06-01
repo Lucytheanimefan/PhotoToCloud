@@ -190,7 +190,7 @@ extension AppDelegate: PHPhotoLibraryChangeObserver {
                             PhotoQueue.shared.queue.append(image)
                             return
                         }
-                        UploadManager.uploadImage(image: image)
+                        UploadManager.shared.uploadImage(image: image)
                     }
                 }
                 

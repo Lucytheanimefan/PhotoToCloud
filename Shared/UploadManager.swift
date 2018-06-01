@@ -13,9 +13,11 @@ import GoogleAPIClientForREST
 
 class UploadManager: NSObject {
     
-    static let driveService = GTLRDriveService()
+    var driveService:GTLRDriveService!
     
-    static func uploadImage(image:UIImage){
+    static let shared = UploadManager()
+    
+    func uploadImage(image:UIImage){
         if (Settings.shared.current_accounts["Google"]!){
             uploadImageToGDrive(image: image)
         }
@@ -24,7 +26,7 @@ class UploadManager: NSObject {
         }
     }
     
-    static func uploadImageSync(image:UIImage){
+    func uploadImageSync(image:UIImage){
         if (Settings.shared.current_accounts["Google"]!){
             let sema0 = DispatchSemaphore(value: 0)
             uploadImageToGDrive(image: image) {
@@ -43,7 +45,7 @@ class UploadManager: NSObject {
         
     }
     
-    static func uploadImageToFlickr(image:UIImage, completion: (() -> ())? = nil){
+    func uploadImageToFlickr(image:UIImage, completion: (() -> ())? = nil){
         
         print("Upload Flickr image with settings: \(Settings.shared.flickrArgs)")
         FlickrKit.shared().uploadImage(image, args: Settings.shared.flickrArgs) { (result, error) in
@@ -63,8 +65,8 @@ class UploadManager: NSObject {
         }
     }
     
-    static func uploadImageToGDrive(image: UIImage, progressBlock: ((_ bytesRead:UInt64, _ dataLength: UInt64) -> ())? = nil, completion: (() -> ())? = nil){
-        print("\(self.description()): Start upload image to GDrive")
+    func uploadImageToGDrive(image: UIImage, progressBlock: ((_ bytesRead:UInt64, _ dataLength: UInt64) -> ())? = nil, completion: (() -> ())? = nil){
+        print("\(self.description): Start upload image to GDrive")
         guard let fileData = UIImagePNGRepresentation(image) else {
             print("No image data")
             return
@@ -87,9 +89,11 @@ class UploadManager: NSObject {
                 block(numBytesRead, dataLength)
             }
         }
+        
         self.driveService.executeQuery(query, completionHandler:  { (ticket, insertedFile , error) -> Void in
             print(error?.localizedDescription)
-            print(ticket.description)
+            //print(ticket.description)
+            print(ticket.fetchError?.localizedDescription)
             print(insertedFile)
             if error == nil, let myFile = insertedFile as? GTLRDrive_File {
                 print("GDrive success: \(myFile.identifier)")
@@ -101,6 +105,7 @@ class UploadManager: NSObject {
             completion?()
             
         })
+
     }
 
 }

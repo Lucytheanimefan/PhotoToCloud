@@ -24,11 +24,12 @@ class WebViewController: UIViewController {
     
     let scopes = [kGTLRAuthScopeDrive, kGTLRAuthScopeDriveFile, kGTLRAuthScopeDriveAppdata]
     
-    let service = GTLRDriveService()
+    // let service = GTLRDriveService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.webView.navigationDelegate = self
+        UploadManager.shared.driveService = GTLRDriveService()
          setupGoogle()
         // Do any additional setup after loading the view.
     }
@@ -137,11 +138,11 @@ extension WebViewController: GIDSignInUIDelegate, GIDSignInDelegate{
             self.showAlert(title: "Authentication Error", message: error.localizedDescription)
             print("ERROR AUTHENTICATING: \(error.localizedDescription)")
             Settings.shared.logs.append("\(Date()): Google auth error: \(error.localizedDescription)")
-            self.service.authorizer = nil
+            UploadManager.shared.driveService.authorizer = nil
         } else {
             self.signInButton.isHidden = true
             self.output.isHidden = false
-            self.service.authorizer = user.authentication.fetcherAuthorizer()
+            UploadManager.shared.driveService.authorizer = user.authentication.fetcherAuthorizer()
             listFiles()
             //self.dismiss(animated: true, completion: nil)
         }
@@ -151,7 +152,7 @@ extension WebViewController: GIDSignInUIDelegate, GIDSignInDelegate{
     func listFiles() {
         let query = GTLRDriveQuery_FilesList.query()
         query.pageSize = 10
-        service.executeQuery(query,
+        UploadManager.shared.driveService.executeQuery(query,
                              delegate: self,
                              didFinish: #selector(displayResultWithTicket(ticket:finishedWithObject:error:))
         )

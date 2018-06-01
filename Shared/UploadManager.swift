@@ -77,6 +77,11 @@ class UploadManager: NSObject {
             return
         }
         
+        if !self.GDrivePhotoFolderExists(){
+            print("Doesn't exist!")
+            self.createGDrivePhotoFolder()
+        }
+        
         let mimeType = "image/png"
         let gFile = GTLRDrive_File()
         
@@ -110,9 +115,9 @@ class UploadManager: NSObject {
             completion?()
             
         })
-
     }
-    func findGDrivePhotoFolder()->Bool{
+    
+    func GDrivePhotoFolderExists()->Bool{
         var found:Bool = false
         
         let query = GTLRDriveQuery_FilesList.query()
@@ -120,30 +125,33 @@ class UploadManager: NSObject {
         query.spaces = "drive"
         query.fields = "nextPageToken, files(id, name)"
         
+        let sema = DispatchSemaphore(value: 1)
         self.driveService.executeQuery(query) { (ticket, folders, error) in
-            
+            if let error = error{
+                Settings.shared.addLog(log: "Error finding GDrive folder: \(error.localizedDescription)")
+            }
+            else
+            {
+                if let folders = folders as? GTLRDrive_FileList{
+                    Settings.shared.addLog(log: "Found GDrive folder")
+                    for file in folders.files!{
+                        print(file.name)
+                        if file.name == "iPhonePhotos"{
+                            found = true
+                            break
+                        }
+                    }
+                }
+            }
+            sema.signal()
         }
-        
-//        GTLRDriveQuery_FilesList *query = [GTLRDriveQuery_FilesList query];
-//        query.q = @"mimeType='image/jpeg'";
-//        query.spaces = @"drive";
-//        query.fields = @"nextPageToken, files(id, name)";
-//        [driveService executeQuery:query completionHandler:^(GTLRServiceTicket *ticket,
-//            GTLRDrive_FileList *files,
-//            NSError *error) {
-//            if (error == nil) {
-//            for(GTLRDrive_File *file in files) {
-//            NSLog(@"Found file: %@ (%@)", file.name, file.identifier);
-//            }
-//            } else {
-//            NSLog(@"An error occurred: %@", error);
-//            }
-//            }];
-        
+        sema.wait()
         return found
+
+
     }
     
-    func createGDrivePhotoFolder(completion: (()->())? = nil){
+    func createGDrivePhotoFolder(){
         let metadata = GTLRDrive_File()
         metadata.name = "iPhonePhotos"
         
@@ -151,16 +159,19 @@ class UploadManager: NSObject {
         let querys = GTLRDriveQuery_FilesCreate.query(withObject: metadata, uploadParameters: nil)
         querys.fields = "id"
         
+        let sema = DispatchSemaphore(value: 0)
         self.driveService.executeQuery(querys, completionHandler: {(ticket:GTLRServiceTicket, object:Any?, error:Error?) in
             
             if let error = error{
+                print("\(self.description): \(error)")
                 Settings.shared.addLog(log: "Error creating GDrive folder: \(error.localizedDescription)")
             }
             else{
                 Settings.shared.addLog(log: "Created GDrive folder")
             }
-            completion?()
+            sema.signal()
         })
+        sema.wait()
         
     }
     

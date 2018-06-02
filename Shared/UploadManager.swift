@@ -77,10 +77,15 @@ class UploadManager: NSObject {
             return
         }
         
-        if !self.GDrivePhotoFolderExists(){
-            print("Doesn't exist!")
-            self.createGDrivePhotoFolder()
+        let sema = DispatchSemaphore(value: 2)
+        self.GDrivePhotoFolderExists { (found) in
+            if !found{
+                self.createGDrivePhotoFolder()
+            }
+            sema.signal()
         }
+        sema.wait()
+  
         
         let mimeType = "image/png"
         let gFile = GTLRDrive_File()
@@ -117,7 +122,12 @@ class UploadManager: NSObject {
         })
     }
     
-    func GDrivePhotoFolderExists()->Bool{
+    func GDrivePhotoFolderExists(completion: @escaping (_ found:Bool)->()){
+        guard driveService != nil else {
+            print("Google drive service is nil")
+            return
+        }
+        
         var found:Bool = false
         
         let query = GTLRDriveQuery_FilesList.query()
@@ -125,9 +135,9 @@ class UploadManager: NSObject {
         query.spaces = "drive"
         query.fields = "nextPageToken, files(id, name)"
         
-        let sema = DispatchSemaphore(value: 1)
         self.driveService.executeQuery(query) { (ticket, folders, error) in
             if let error = error{
+                print(error.localizedDescription)
                 Settings.shared.addLog(log: "Error finding GDrive folder: \(error.localizedDescription)")
             }
             else
@@ -138,20 +148,22 @@ class UploadManager: NSObject {
                         print(file.name)
                         if file.name == "iPhonePhotos"{
                             found = true
-                            break
+                            completion(found)
+                            return
                         }
                     }
                 }
+                completion(found)
             }
-            sema.signal()
         }
-        sema.wait()
-        return found
-
-
     }
     
     func createGDrivePhotoFolder(){
+        guard driveService != nil else {
+            print("Google drive service is nil")
+            return
+        }
+        
         let metadata = GTLRDrive_File()
         metadata.name = "iPhonePhotos"
         

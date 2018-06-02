@@ -28,9 +28,6 @@ class MainViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        #if DEBUG
-        Settings.shared.logs.append("\(Date()): Accessed main view")
-        #endif
         updateLoginStatus()
     }
     

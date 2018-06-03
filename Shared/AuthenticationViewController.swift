@@ -23,6 +23,10 @@ class AuthenticationViewController: UIViewController, UITableViewDelegate, UITab
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.tableView.reloadData()
+    }
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -42,7 +46,12 @@ class AuthenticationViewController: UIViewController, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "accountCell") as! UITableViewCell
-        cell.textLabel?.text = Array(Settings.shared.current_accounts.keys)[indexPath.row]
+        let account = Array(Settings.shared.current_accounts.keys)[indexPath.row]
+        var text = account + ", "
+        
+        text += Settings.shared.current_accounts[account]! ? "Active" : "Unactive"
+        
+        cell.textLabel?.text = text
         return cell
     }
     

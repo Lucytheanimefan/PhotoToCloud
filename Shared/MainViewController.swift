@@ -32,45 +32,31 @@ class MainViewController: UIViewController {
     }
     
     func updateLoginStatus(){
-        
-        // Flickr
         FlickrKit.shared().checkAuthorization { (username, auth, name, error) in
             DispatchQueue.main.async {
-                if (error != nil){
-                    self.loginStatusTextView.text = error?.localizedDescription
+                var loginMessage:String = ""
+                if let error = error{
+                    loginMessage += error.localizedDescription
                 }
                 else{
-                    self.loginStatusTextView.text = "Logged in on Flickr with username \(username!) as \(name!)"
+                    loginMessage += "Logged in on Flickr with username \(username!) as \(name!)"
                 }
-                self.loginStatusTextView.text = self.loginStatusTextView.text + "\n" + ((GIDSignIn.sharedInstance().hasAuthInKeychain()) ? "Logged into Google" : "Not logged into Google")
+                
+                loginMessage += "\n"
+                
+                loginMessage += ((GIDSignIn.sharedInstance().hasAuthInKeychain()) ? "Logged into Google" : "Not logged into Google")
+
+                self.loginStatusTextView.text = loginMessage
             }
         }
-        
-        // Google
-//        print(GIDSignIn.sharedInstance().hasAuthInKeychain())
-//        if GIDSignIn.sharedInstance().hasAuthInKeychain() {
-//            if (GIDSignIn.sharedInstance().currentUser != nil){
-//                if let email = GIDSignIn.sharedInstance().currentUser.profile.email{
-//                    self.loginStatusTextView.text = self.loginStatusTextView.text + "\nLogged in as \(email)"
-//                }
-//            }
-//            else{
-//                self.loginStatusTextView.text = self.loginStatusTextView.text + "\nLogged into Google"
-//            }
-//        }
-        
     }
+    
     @IBAction func uploadPhotoBacklog(_ sender: UIButton) {
         PhotoQueue.shared.uploadBacklog()
     }
     
     @IBAction func testUpload(_ sender: UIButton) {
         let image = #imageLiteral(resourceName: "penguinOctopus")
-//        UploadManager.shared.uploadImageToGDrive(image: image, progressBlock: { (bytesRead, dataLength) in
-//            self.progressView.setProgress(Float(bytesRead/dataLength), animated: true)
-//        }) {
-//            print("DONE")
-//        }
         UploadManager.shared.uploadImage(image: image)
     }
     

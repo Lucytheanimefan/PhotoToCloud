@@ -8,7 +8,8 @@
 
 import UIKit
 
-class AuthenticationViewController: UIViewController {
+class AuthenticationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    @IBOutlet weak var tableView: UITableView!
     
     var selectedAuth:String = "Flickr"
     override func viewDidLoad() {
@@ -43,6 +44,23 @@ class AuthenticationViewController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-
-
+    
+    // MARK: Tableview delegate & datasource
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return Settings.shared.current_accounts.keys.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "accountCell") as! UITableViewCell
+        cell.textLabel?.text = Array(Settings.shared.current_accounts.keys)[indexPath.row]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let account = Array(Settings.shared.current_accounts.keys)[indexPath.row]
+        selectedAuth = account
+        self.performSegue(withIdentifier: "toWebView", sender: self)
+    }
 }
+

@@ -53,12 +53,37 @@ class WebViewController: UIViewController {
                     message: "Already logged into Google",
                     preferredStyle: UIAlertControllerStyle.alert
                 )
-                let ok = UIAlertAction(title: "Ok", style: .default) { (action) in
+                let okAction = UIAlertAction(title: "Ok", style: .default) { (action) in
                     self.dismiss(animated: true, completion: {
                         
                     })
                 }
-                alert.addAction(ok)
+                
+                let logoutAction = UIAlertAction(title: "Logout", style: .default, handler: { (action) in
+                    GIDSignIn.sharedInstance().signOut()
+                    self.dismiss(animated: true, completion: nil)
+                })
+                
+                var activateAction:UIAlertAction!
+                if (self.accountActive()){
+                    activateAction = UIAlertAction(title: "Unactivate", style: .default, handler: { (action) in
+                        self.unactivateAccount()
+                        self.dismiss(animated: true, completion: nil)
+                    })
+                }
+                else
+                {
+                    activateAction = UIAlertAction(title: "Activate", style: .default, handler: { (action) in
+                        self.activateAccount()
+                        self.dismiss(animated: true, completion: nil)
+                    })
+                }
+                
+                // TODO: continue to login anyway action
+                alert.addAction(okAction)
+                alert.addAction(logoutAction)
+                alert.addAction(activateAction)
+          
                 self.present(alert, animated: true, completion: nil)
             }
             else
@@ -87,20 +112,37 @@ class WebViewController: UIViewController {
                     let alert = UIAlertController(title: "Already authenticated",
                                                   message: "Logged in as \(username!)",
                         preferredStyle: .alert)
+                    
                     let okAction = UIAlertAction(title: "Ok", style: .default, handler: { (action) in
                         self.dismiss(animated: true, completion: {
                             print("Dismissed")
                         })
                     })
                     
-                    let loginAction = UIAlertAction(title: "Continue with login", style: .default, handler: { (action) in
-                        self.dismiss(animated: true, completion: {
-                            self.auth()
-                        })
+                    let logoutAction = UIAlertAction(title: "Logout", style: .default, handler: { (action) in
+                        FlickrKit.shared().logout()
+                        self.dismiss(animated: true, completion: nil)
                     })
+                    
+                    var activateAction:UIAlertAction!
+                    if (self.accountActive()){
+                        activateAction = UIAlertAction(title: "Unactivate", style: .default, handler: { (action) in
+                            self.unactivateAccount()
+                            self.dismiss(animated: true, completion: nil)
+                        })
+                    }
+                    else
+                    {
+                        activateAction = UIAlertAction(title: "Activate", style: .default, handler: { (action) in
+                            self.activateAccount()
+                            self.dismiss(animated: true, completion: nil)
+                        })
+                    }
+                    
                     // TODO: continue to login anyway action
                     alert.addAction(okAction)
-                    alert.addAction(loginAction)
+                    alert.addAction(logoutAction)
+                    alert.addAction(activateAction)
                     self.present(alert, animated: true, completion: nil)
                 }
             }
@@ -125,9 +167,6 @@ class WebViewController: UIViewController {
             if let error = error{
                 print("\(self.description): \(error)")
                 Settings.shared.logs.append("\(Date()): Error authenticating: \(error.localizedDescription)")
-//                DispatchQueue.main.async {
-//                    self.showAlert(title: "Error authenticating", message: error.debugDescription)
-//                }
             } else if let url = url{
                 print(url)
                 DispatchQueue.main.async(execute: { () -> Void in
@@ -145,6 +184,18 @@ class WebViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    func accountActive()->Bool{
+        return Settings.shared.current_accounts[selectedAuth]!
+    }
+    
+    func activateAccount(){
+        Settings.shared.current_accounts[selectedAuth] = true
+    }
+    
+    func unactivateAccount(){
+        Settings.shared.current_accounts[selectedAuth] = false
+    }
+    
     
 }
 
@@ -159,8 +210,8 @@ extension WebViewController: GIDSignInUIDelegate, GIDSignInDelegate{
             self.signInButton.isHidden = true
             self.output.isHidden = false
             UploadManager.shared.driveService.authorizer = user.authentication.fetcherAuthorizer()
-            listFiles()
-            //self.dismiss(animated: true, completion: nil)
+            activateAccount()
+            self.dismiss(animated: true, completion: nil)
         }
     }
     
@@ -218,6 +269,7 @@ extension WebViewController: WKNavigationDelegate{
                     decisionHandler(.cancel)
                 }
                 else if let username = username{
+                    self.activateAccount()
                     Settings.shared.logs.append("\(Date()): Successfully authenticated \(username)'s Flickr account")
                     DispatchQueue.main.async {
                         let alert = UIAlertController(title: "Success",

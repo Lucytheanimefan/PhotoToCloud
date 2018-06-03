@@ -42,9 +42,10 @@ class LogTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let index = Settings.shared.logs.count - indexPath.row - 1
         let cell = tableView.dequeueReusableCell(withIdentifier: "logId", for: indexPath)
 
-        cell.textLabel?.text = Settings.shared.logs[indexPath.row]
+        cell.textLabel?.text = Settings.shared.logs[index]
 
         return cell
     }
@@ -55,7 +56,8 @@ class LogTableViewController: UITableViewController {
     
 
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-         self.selectedLog = Settings.shared.logs[indexPath.row]
+        let index = Settings.shared.logs.count - indexPath.row - 1
+        self.selectedLog = Settings.shared.logs[index]
 
         return indexPath
     }

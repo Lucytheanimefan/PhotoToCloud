@@ -202,8 +202,9 @@ extension AppDelegate: PHPhotoLibraryChangeObserver {
                 
             }
         } else {
+            // TODO: should this even go here, how to get all images?
             if UploadManager.shared.shouldUploadPastImages{
-                // TODO: how to get all images
+                
             }
         }
         // resetCachedAssets()

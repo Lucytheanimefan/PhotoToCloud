@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     var window: UIWindow?
     var fetchResult: PHFetchResult<PHAsset>!
+    var allPhotos: PHFetchResult<PHAsset>!
     
     func tryBacklog(){
         guard PhotoQueue.shared.isBacklog() else {return}
@@ -45,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
  
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
         // Override point for customization after application launch.
-        
+        getAllPhotos()
         setUpFlickr()
         setupGDrive()
         registerForPushNotifications()
@@ -86,6 +87,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     func applicationSignificantTimeChange(_ application: UIApplication) {
         updateFetchResult()
         tryBacklog()
+    }
+    
+    func getAllPhotos(){
+        let allPhotosOptions = PHFetchOptions()
+        allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+        allPhotos = PHAsset.fetchAssets(with: allPhotosOptions)
     }
     
     func updateFetchResult(){
@@ -170,41 +177,46 @@ extension AppDelegate: PHPhotoLibraryChangeObserver {
     // Change notifications may be made on a background queue.
     func photoLibraryDidChange(_ changeInstance: PHChange) {
         
-        guard let changes = changeInstance.changeDetails(for: fetchResult)
-            else { return }
+        if let changeDetails = changeInstance.changeDetails(for: allPhotos) {
+            // Update the cached fetch result.
+            allPhotos = changeDetails.fetchResultAfterChanges
+        }
         
-        fetchResult = changes.fetchResultAfterChanges
-        if changes.hasIncrementalChanges {
-            // If we have incremental diffs
-            if let removed = changes.removedIndexes, removed.count > 0 {
-                
-            }
-            if let inserted = changes.insertedIndexes, inserted.count > 0 {
-                // New photos are added, upload to cloud
-                print("\(self.description): Added photos: \(inserted.count)")
-                Settings.shared.logs.append("\(Date()): New photo detected")
-                
-                changes.insertedObjects.forEach { (asset) in
-                    if let image = getUIImage(asset: asset){
-                        guard Reachability.isConnectedToNetwork() else {
-                            PhotoQueue.shared.queue.append(image)
-                            return
-                        }
-                        UploadManager.shared.uploadImage(image: image)
-                    }
+        if let changes = changeInstance.changeDetails(for: fetchResult)
+        {
+            fetchResult = changes.fetchResultAfterChanges
+            if changes.hasIncrementalChanges {
+                // If we have incremental diffs
+                if let removed = changes.removedIndexes, removed.count > 0 {
+                    
                 }
-                
-            }
-            if let changed = changes.changedIndexes, changed.count > 0 {
-                
-            }
-            changes.enumerateMoves { fromIndex, toIndex in
-                
-            }
-        } else {
-            // TODO: should this even go here, how to get all images?
-            if UploadManager.shared.shouldUploadPastImages{
-                
+                if let inserted = changes.insertedIndexes, inserted.count > 0 {
+                    // New photos are added, upload to cloud
+                    print("\(self.description): Added photos: \(inserted.count)")
+                    Settings.shared.logs.append("\(Date()): New photo detected")
+                    
+                    changes.insertedObjects.forEach { (asset) in
+                        if let image = getUIImage(asset: asset){
+                            guard Reachability.isConnectedToNetwork() else {
+                                PhotoQueue.shared.queue.append(image)
+                                return
+                            }
+                            UploadManager.shared.uploadImage(image: image)
+                        }
+                    }
+                    
+                }
+                if let changed = changes.changedIndexes, changed.count > 0 {
+                    
+                }
+                changes.enumerateMoves { fromIndex, toIndex in
+                    
+                }
+            } else {
+                // TODO: should this even go here, how to get all images?
+                if UploadManager.shared.shouldUploadPastImages{
+                    
+                }
             }
         }
         // resetCachedAssets()

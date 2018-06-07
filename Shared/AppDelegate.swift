@@ -93,6 +93,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let allPhotosOptions = PHFetchOptions()
         allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
         allPhotos = PHAsset.fetchAssets(with: allPhotosOptions)
+        print("All photos count: \(allPhotos.count)")
+        //print(allPhotos.enumerateObjects(<#T##block: (PHAsset, Int, UnsafeMutablePointer<ObjCBool>) -> Void##(PHAsset, Int, UnsafeMutablePointer<ObjCBool>) -> Void#>))
     }
     
     func updateFetchResult(){

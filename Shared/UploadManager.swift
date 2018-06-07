@@ -10,12 +10,26 @@ import UIKit
 import FlickrKit
 import GoogleSignIn
 import GoogleAPIClientForREST
+import Photos
 
 class UploadManager: NSObject {
     
     var driveService:GTLRDriveService!
     
     static let shared = UploadManager()
+    
+    var shouldUploadPastImages:Bool!
+    
+    func uploadImages(){
+        // Trigger a change (AppDelegate should be called)
+        PHPhotoLibrary.shared().performChanges({
+            print("\(self.description): Finished uploading all images from photo library")
+        }) { (success, error) in
+            if let error = error{
+                print(error.localizedDescription)
+            }
+        }
+    }
     
     func uploadImage(image:UIImage){
         if (Settings.shared.current_accounts["Google"]!){
@@ -186,5 +200,4 @@ class UploadManager: NSObject {
         sema.wait()
         
     }
-    
 }

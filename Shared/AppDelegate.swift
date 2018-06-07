@@ -202,7 +202,9 @@ extension AppDelegate: PHPhotoLibraryChangeObserver {
                 
             }
         } else {
-            // incremental diffs are not available, do nothing
+            if UploadManager.shared.shouldUploadPastImages{
+                // TODO: how to get all images
+            }
         }
         // resetCachedAssets()
     }

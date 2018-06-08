@@ -8,6 +8,7 @@
 
 
 import UIKit
+import CoreLocation
 import Photos
 import UserNotifications
 import FlickrKit
@@ -21,8 +22,10 @@ import GoogleToolboxForMac
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
 
     var window: UIWindow?
-    var fetchResult: PHFetchResult<PHAfetchResultsset>!
+    var fetchResult: PHFetchResult<PHAsset>!
     var allPhotos: PHFetchResult<PHAsset>!
+    
+    var locationManager:CLLocationManager!
     
     func tryBacklog(){
         guard PhotoQueue.shared.isBacklog() else {return}
@@ -32,10 +35,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         PhotoQueue.shared.uploadBacklog()
     }
     
-    func uploadAllPhotos(){
-        self.allPhotos.enumerateObjects { (asset, someNum, somePointer) in
-            let image = getUIImage(asset: asset)
-            UploadManager.shared.uploadImage(image: image)
+    func uploadAllPhotos(untilCreationDate:Date? = nil, locationRange:Double? = nil){
+        let total = self.allPhotos.count
+        for i in 0 ... total {
+            let asset = self.allPhotos.object(at: i)
+            if let creationDate = untilCreationDate {
+                if ((asset.creationDate?.compare(creationDate).rawValue)! > 0){
+                    // If photo was created after creation date, stop uploading
+                    return
+                }
+            }
+            if let locationRange = locationRange, let location = locationManager.location{
+                
+                // TODO: what range of location to include?
+                if (asset.location?.distance(from: location))! > locationRange{
+                    // If outside of the range, don't upload
+                    continue
+                }
+            }
+            if let image = getUIImage(asset: asset){
+                UploadManager.shared.uploadImage(image: image)
+            }
         }
     }
     
@@ -59,7 +79,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         registerForPushNotifications()
         updateFetchResult()
         PHPhotoLibrary.shared().register(self)
-        
+        self.locationManager = CLLocationManager()
+        self.locationManager.delegate = self
+        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.requestLocation()
         return true
     }
     
@@ -257,3 +281,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate{
 
 }
 
+extension AppDelegate: CLLocationManagerDelegate{
+    
+}

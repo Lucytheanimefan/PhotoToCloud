@@ -21,7 +21,7 @@ import GoogleToolboxForMac
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
 
     var window: UIWindow?
-    var fetchResult: PHFetchResult<PHAsset>!
+    var fetchResult: PHFetchResult<PHAfetchResultsset>!
     var allPhotos: PHFetchResult<PHAsset>!
     
     func tryBacklog(){
@@ -30,6 +30,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         self.doNotifications(title: "Upload backlog", body: "Uploaded \(PhotoQueue.shared.queue.count) backlog images")
         #endif
         PhotoQueue.shared.uploadBacklog()
+    }
+    
+    func uploadAllPhotos(){
+        self.allPhotos.enumerateObjects { (asset, someNum, somePointer) in
+            let image = getUIImage(asset: asset)
+            UploadManager.shared.uploadImage(image: image)
+        }
     }
     
     func setUpFlickr(){
@@ -93,8 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let allPhotosOptions = PHFetchOptions()
         allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
         allPhotos = PHAsset.fetchAssets(with: allPhotosOptions)
-        print("All photos count: \(allPhotos.count)")
-        //print(allPhotos.enumerateObjects(<#T##block: (PHAsset, Int, UnsafeMutablePointer<ObjCBool>) -> Void##(PHAsset, Int, UnsafeMutablePointer<ObjCBool>) -> Void#>))
+        print("\(self.description): All photos count: \(allPhotos.count)")
     }
     
     func updateFetchResult(){

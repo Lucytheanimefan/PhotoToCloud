@@ -282,5 +282,20 @@ extension AppDelegate: UNUserNotificationCenterDelegate{
 }
 
 extension AppDelegate: CLLocationManagerDelegate{
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        // If it's a relatively recent event, turn off updates to save power.
+        guard let location = locations.last else { return }
+        let eventDate = location.timestamp;
+        let howRecent = eventDate.timeIntervalSinceNow;
+        if (Int(howRecent) < 5) { //TODO: hardcoded time interval, change later
+            //This is just for debugging, feel free to add functionality or delte this entire block of code
+            print("latitude %+.6f, longitude %+.6f\n",
+                  location.coordinate.latitude as Any,
+                  location.coordinate.longitude as Any);
+        }
+    }
     
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Location failed: \(error.localizedDescription)")
+    }
 }

@@ -184,17 +184,12 @@
                                     <action selector="testUpload:" destination="Pv9-b9-vCH" eventType="touchUpInside" id="gcg-YY-UVN"/>
                                 </connections>
                             </button>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xbk-0H-tXZ">
-                                <rect key="frame" x="112" y="347" width="150" height="2"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </progressView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Main" id="dz2-eq-Pck"/>
                     <connections>
                         <outlet property="loginStatusTextView" destination="eId-ch-a8b" id="CdQ-2t-DZ3"/>
-                        <outlet property="progressView" destination="Xbk-0H-tXZ" id="2ai-Yi-xcc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dfX-A3-GwO" userLabel="First Responder" sceneMemberID="firstResponder"/>

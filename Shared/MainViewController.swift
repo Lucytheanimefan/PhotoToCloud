@@ -13,7 +13,6 @@ import GoogleSignIn
 class MainViewController: UIViewController {
     @IBOutlet weak var loginStatusTextView: UITextView!
     
-    @IBOutlet weak var progressView: UIProgressView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
